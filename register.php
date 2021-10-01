@@ -17,8 +17,8 @@
 
     <div class="form-register">
         <h2>Register</h2>
-        <form action="" class="form">
-            <input type="text" name="email" id="email" 
+        <form action="submitRegister.php" method="POST" class="form">
+            <input type="text" name="email" id="email"
             placeholder="Email" onblur="valEmail(this.value);">
             <label for="email" class="email-err hide">Please enter a valid email.</label>
 
@@ -34,8 +34,18 @@
             placeholder="Confirm Password" onkeyup="valConfirmPassword(this.value)"> 
             <label for="confirmpassword" class="confirmpass-err hide">Those passwords didn't match, try again.</label>
             
+            <?php 
+            if($_GET["err"]=="1"){
+            ?>
+                <p id="submit-err">Please fill all the required fields properly.</p>
+            <?php 
+            }
+            ?>
+            
+            
             <button class="reg-button">Register</button>
         </form>
+        
     </div>
 
 </div>
@@ -136,6 +146,7 @@
             msg.classList.add("hide");
         }
     }
+
 
 </script>
 

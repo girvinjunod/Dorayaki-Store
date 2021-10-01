@@ -15,6 +15,7 @@ if ($email != ""){
 } else if ($uname != "") {
     $pattern = "/[a-z0-9_]+$/i";
     if (preg_match($pattern, $uname)){
+        //add database validation
         echo true;
     }
     else{
