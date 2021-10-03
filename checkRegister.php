@@ -1,4 +1,5 @@
 <?php
+
 $email = $_REQUEST["email"];
 $uname = $_REQUEST["uname"];
 $password = $_REQUEST["password"];
@@ -15,8 +16,23 @@ if ($email != ""){
 } else if ($uname != "") {
     $pattern = "/[a-z0-9_]+$/i";
     if (preg_match($pattern, $uname)){
-        //add database validation
-        echo true;
+        //database validation
+        $db = new SQLite3('doraemon.db');
+         if(!$db) {
+            echo false;
+         } else {    
+            $res = $db->query('SELECT * FROM user');
+            $valid = true;
+
+            while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+                if ($row['username'] == $uname){
+                    $valid = false;
+                    break;
+                  }
+                }
+            }
+        $db->close();
+        echo $valid;
     }
     else{
         echo false;

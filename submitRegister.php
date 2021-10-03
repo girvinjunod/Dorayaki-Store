@@ -18,10 +18,22 @@ if ($email and $uname and $password and $confirmpassword){
     if ($uname != "") {
         $pattern = "/[a-z0-9_]+$/i";
         if (preg_match($pattern, $uname)){
-            // add database validation
-            $valUname = true;
+            //database validation
+            $db = new SQLite3('doraemon.db');
+    
+            if($db) {    
+                $res = $db->query('SELECT * FROM user');
+                $valUname = true;
+                while($row = $res->fetchArray(SQLITE3_ASSOC) ) {
+                    if ($row['username'] == $uname){
+                        $valUname = false;
+                        break;
+                      }
+                    }
+                }
+            $db->close();
         }
-    } 
+    }
     if ($password != "") {
         if (strlen($password) >=6){
             $valPassword = true;
@@ -34,9 +46,28 @@ if ($email and $uname and $password and $confirmpassword){
     }
 
     if ($valEmail and $valUname and $valPassword and $valConfirm){
-        echo "yey";
+        echo "data valid";
         // masukin ke database
+        $db = new SQLite3('doraemon.db');
+         if(!$db) {
+            echo "Error opening database";
+         } else {
+            $prep = $db->prepare("INSERT INTO user(email, username, password, is_admin) VALUES (?, ?, ?, ?)");
+            $prep->bindParam(1, $email);
+            $prep->bindParam(2, $uname);
+            $prep->bindParam(3, $password);
+            $prep->bindParam(4, $admin);
+            $admin = 0;
+            $res = $prep->execute();
+            if(!$res) {
+                echo $db->lastErrorMsg();
+              } else {
+                    echo "Data Inserted";
+            }
+         }
+        $db->close();
         // login
+
         // header('Location: '. "dashboard.php");
     } else {
         // echo $valEmail;

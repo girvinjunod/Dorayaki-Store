@@ -23,7 +23,7 @@
             <label for="email" class="email-err hide">Please enter a valid email.</label>
 
             <input type="text" name="uname" id="uname" 
-            placeholder="Username" onblur="valUname(this.value);" class="uname">
+            placeholder="Username" onblur="valUname(this.value);">
             <label for="uname" class="uname-err hide">Please make sure your username is unique and valid [a-zA-Z0-9_].</label>
             
             <input type="password" name="password" id="password" 
@@ -37,7 +37,7 @@
             <?php 
             if($_GET["err"]=="1"){
             ?>
-                <p id="submit-err">Please fill all the required fields properly.</p>
+                <p id="submit-err">Please fill all the required fields properly before registering.</p>
             <?php 
             }
             ?>
@@ -53,6 +53,7 @@
 <script>
     function valEmail(email){
         var msg = document.querySelector(".email-err");
+        var input = document.getElementsByName("email")[0];
         if (email.length > 0){
             const req = new XMLHttpRequest();
             req.onload = function (){
@@ -60,10 +61,12 @@
                     if (this.responseText) {
                         console.log("benar");
                         msg.classList.add("hide");
+                        input.classList.add("correct");
                     }
                     else{
                         console.log("salah");
                         msg.classList.remove("hide");
+                        input.classList.remove("correct");
                     }
                 }
             }
@@ -71,12 +74,22 @@
             req.send()
         } else{
             msg.classList.add("hide");
+            input.classList.remove("correct");
         }
+
+        <?php 
+            if($_GET["err"]=="1"){
+            ?>
+                var submitErr = document.querySelector("#submit-err");
+                submitErr.classList.add("hide");
+            <?php 
+            }
+        ?>
     }
 
     function valUname(uname){
         var msg = document.querySelector(".uname-err");
-        var input = document.querySelector(".uname");
+        var input = document.getElementsByName("uname")[0];
         if (uname.length > 0){
             const req = new XMLHttpRequest();
             req.onload = function (){
@@ -100,6 +113,15 @@
             msg.classList.add("hide");
             input.classList.remove("correct");
         }
+
+        <?php 
+            if($_GET["err"]=="1"){
+            ?>
+                var submitErr = document.querySelector("#submit-err");
+                submitErr.classList.add("hide");
+            <?php 
+            }
+        ?>
     }
 
     function valPassword(password){
@@ -123,19 +145,35 @@
         } else{
             msg.classList.add("hide");
         }
+
+        <?php 
+            if($_GET["err"]=="1"){
+            ?>
+                var submitErr = document.querySelector("#submit-err");
+                submitErr.classList.add("hide");
+            <?php 
+            }
+        ?>
     }
 
     function valConfirmPassword(conpassword){
         var msg = document.querySelector(".confirmpass-err");
+        var input1 = document.getElementsByName("password")[0];
+        var input2 = document.getElementsByName("confirmpassword")[0];
+
         if (conpassword.length > 0){
             const req = new XMLHttpRequest();
             req.onload = function (){
                 if (this){
                     if (this.responseText) {
                         msg.classList.add("hide");
+                        input1.classList.add("correct");
+                        input2.classList.add("correct");
                     }
                     else{
                         msg.classList.remove("hide");
+                        input1.classList.remove("correct");
+                        input2.classList.remove("correct");
                     }
                 }
             }
@@ -144,7 +182,17 @@
             req.send()
         } else{
             msg.classList.add("hide");
+            input1.classList.remove("correct");
+            input2.classList.remove("correct");
         }
+        <?php 
+            if($_GET["err"]=="1"){
+            ?>
+                var submitErr = document.querySelector("#submit-err");
+                submitErr.classList.add("hide");
+            <?php 
+            }
+        ?>
     }
 
 
