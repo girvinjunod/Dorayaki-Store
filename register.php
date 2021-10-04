@@ -13,7 +13,7 @@
 <body>
 <div class="container">
     <div class="gambar">
-        <img src="assets/register.png" alt="doraemon buka pintu" class="doraemon">
+        <img src="assets/img/register.png" alt="doraemon buka pintu" class="doraemon">
     </div>
 
     <div class="form-register">

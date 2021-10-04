@@ -17,7 +17,7 @@ if ($email != ""){
     $pattern = "/[a-z0-9_]+$/i";
     if (preg_match($pattern, $uname)){
         //database validation
-        $db = new SQLite3('doraemon.db');
+        $db = new SQLite3('db/doraemon.db');
          if(!$db) {
             echo false;
          } else {    

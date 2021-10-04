@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background-image: url("addVariant.png");
+    background-image: url("img/addVariant.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -50,6 +50,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 0.85rem;
     height: 8rem;
+    resize: none;
 }
 
 .form .label{

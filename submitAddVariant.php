@@ -40,17 +40,17 @@ if ($name and $desc and $price and $stock){
 
     if ($valName and $valPrice and $valDesc and $valStock){
         echo "yey";
-        $db = new SQLite3('doraemon.db');
+        $db = new SQLite3('db/doraemon.db');
 
         if(!$db) {
             echo "Error opening database";
          } else {
             $res = $db->query("SELECT COUNT(1) from dorayaki");
             while($row = $res->fetchArray()) {
-                $lastrow = $row["COUNT(1)"];
+                $lastrow = $row["COUNT(1)"] + 1;
             }
          }
-            $target_dir = "img/";
+            $target_dir = "db/img/";
             $target_file = $target_dir . $lastrow . ".";
             $imageFileType = strtolower(pathinfo($_FILES["img"]["name"],PATHINFO_EXTENSION));
             $target_file .= $imageFileType;
