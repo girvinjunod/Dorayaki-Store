@@ -19,7 +19,7 @@ if ($email and $uname and $password and $confirmpassword){
         $pattern = "/[a-z0-9_]+$/i";
         if (preg_match($pattern, $uname)){
             //database validation
-            $db = new SQLite3('doraemon.db');
+            $db = new SQLite3('db/doraemon.db');
     
             if($db) {    
                 $res = $db->query('SELECT * FROM user');
@@ -48,7 +48,7 @@ if ($email and $uname and $password and $confirmpassword){
     if ($valEmail and $valUname and $valPassword and $valConfirm){
         echo "data valid";
         // masukin ke database
-        $db = new SQLite3('doraemon.db');
+        $db = new SQLite3('db/doraemon.db');
          if(!$db) {
             echo "Error opening database";
          } else {

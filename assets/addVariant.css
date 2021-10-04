@@ -1,0 +1,156 @@
+
+
+.container{
+    background-color: rgba(246, 226, 180, 1);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: url("img/addVariant.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.form-register{
+    height: auto;
+    width: 27rem;
+    background: rgba(70, 12, 1, 1);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.form-register h2{
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.form{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+
+.form input{
+    margin: 8px 0px 8px 0px;
+    padding: 12px 10px 12px 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 0.85rem;
+}
+
+.form textarea{
+    margin: 8px 0px 8px 0px;
+    padding: 12px 10px 12px 10px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.85rem;
+    height: 8rem;
+    resize: none;
+}
+
+.form .label{
+    color: red;
+    font-size: 0.8rem;
+    padding-left: 2px;
+}
+
+.add-button{
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+    margin-left: auto;
+    background: rgba(2, 117, 216, 1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.add-button:hover{
+    background: rgba(209, 4, 41, 1);
+}
+
+#submit-err{
+    color: red;
+    font-size: 0.9rem;
+    padding-left: 2px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file-btn{
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+#file-name{
+    font-size: 0.8rem;
+    margin-left:5px;
+}
+
+.file{
+    font-size: 0.8rem;
+    text-align: center;
+    width: 30%;
+    color: white;
+    border-radius: 10px;
+    background: rgba(209, 4, 41, 1);
+    padding: 12px 12px;
+    cursor: pointer;
+    transition-duration: 300ms;
+}
+
+.file:hover{
+    background: white;
+    color: black;
+
+}
+
+.msg{
+    text-align:center;
+    font-size: 0.9rem;
+}
+
+.success-msg{
+    background: rgba(13, 203, 32, 1);
+    position: fixed;
+    display:flex;
+    align-items:center;
+    padding:10px;
+    width: 40%;
+    justify-content: center;
+    margin-left: 30vw;
+    border-radius: 20px;
+    border: none;
+    transition-duration: 1000ms;
+}
+
+.error-msg{
+    background: rgba(205, 45, 24, 1);
+    position: fixed;
+    display:flex;
+    align-items:center;
+    padding:10px;
+    width: 40%;
+    justify-content: center;
+    margin-left: 30vw;
+    border-radius: 20px;
+    border: none;
+    transition-duration: 1000ms;
+}
+
+.hide{
+    display: none;
+}
+
+.hide2{
+    opacity: 0;
+}
