@@ -24,14 +24,169 @@ include "component/header.php";
             <a href="#"> <button class="primary-button"> Learn More </button> </a>
         </div>
         <div class="flat">
-            <img src="asset/img/doraemon1.png">
+            <img src="assets/img/doraemon1.png">
         </div>
     </div>
     <div class="arrow-down">
-        <a href="#"> &#8964; </a>
+        <a href="#item-list"> &#8964; </a>
     </div>
 </section>
 <!-- End of Dashboard -->
+
+
+<!-- Start of Item List -->
+ <section id="item-list">
+    <div class="container">
+        <div class="card-list">
+            <div class="card">
+                <img src="https://dummyimage.com/600x600/000/fff">
+                <div class="card-content">
+                    <div class="title">
+                        <h6> Dorayaki </h6>
+                    </div>
+                    <div class="subtitle">
+                        <h6> Rp 5.000,00-</h6>
+                    </div>
+                    <div class="content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                    </div>
+                    <button class="primary-button">
+                        BUY
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://dummyimage.com/600x600/000/fff">
+                <div class="card-content">
+                    <div class="title">
+                        <h6> Dorayaki </h6>
+                    </div>
+                    <div class="subtitle">
+                        <h6> Rp 5.000,00-</h6>
+                    </div>
+                    <div class="content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                    </div>
+                    <button class="primary-button">
+                        BUY
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://dummyimage.com/600x600/000/fff">
+                <div class="card-content">
+                    <div class="title">
+                        <h6> Dorayaki </h6>
+                    </div>
+                    <div class="subtitle">
+                        <h6> Rp 5.000,00-</h6>
+                    </div>
+                    <div class="content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                    </div>
+                    <button class="primary-button">
+                        BUY
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://dummyimage.com/600x600/000/fff">
+                <div class="card-content">
+                    <div class="title">
+                        <h6> Dorayaki </h6>
+                    </div>
+                    <div class="subtitle">
+                        <h6> Rp 5.000,00-</h6>
+                    </div>
+                    <div class="content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                    </div>
+                    <button class="primary-button">
+                        BUY
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://dummyimage.com/600x600/000/fff">
+                <div class="card-content">
+                    <div class="title">
+                        <h6> Dorayaki </h6>
+                    </div>
+                    <div class="subtitle">
+                        <h6> Rp 5.000,00-</h6>
+                    </div>
+                    <div class="content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                    </div>
+                    <button class="primary-button">
+                        BUY
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://dummyimage.com/600x600/000/fff">
+                <div class="card-content">
+                    <div class="title">
+                        <h6> Dorayaki </h6>
+                    </div>
+                    <div class="subtitle">
+                        <h6> Rp 5.000,00-</h6>
+                    </div>
+                    <div class="content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                    </div>
+                    <button class="primary-button">
+                        BUY
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://dummyimage.com/600x600/000/fff">
+                <div class="card-content">
+                    <div class="title">
+                        <h6> Dorayaki </h6>
+                    </div>
+                    <div class="subtitle">
+                        <h6> Rp 5.000,00-</h6>
+                    </div>
+                    <div class="content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                    </div>
+                    <button class="primary-button">
+                        BUY
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://dummyimage.com/600x600/000/fff">
+                <div class="card-content">
+                    <div class="title">
+                        <h6> Dorayaki </h6>
+                    </div>
+                    <div class="subtitle">
+                        <h6> Rp 5.000,00-</h6>
+                    </div>
+                    <div class="content">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                    </div>
+                    <button class="primary-button">
+                        BUY
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End of Item List -->
+
 
 <?php
 include "component/footer.php";

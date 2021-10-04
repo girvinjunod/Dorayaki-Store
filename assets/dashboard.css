@@ -1,0 +1,12 @@
+/* =========================
+2.2 - Dashboard
+========================= */
+.dashboard {
+    flex-wrap: wrap;
+    background-color: #FDE8B9;
+    height: 70vh;
+    margin-bottom: 20vh;
+}
+
+.flat img {
+}
