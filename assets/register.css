@@ -79,6 +79,25 @@
     background: rgba(209, 4, 41, 1);
 }
 
+.error-msg{
+    background: rgba(205, 45, 24, 1);
+    position: fixed;
+    display:flex;
+    align-items:center;
+    padding:10px;
+    width: 40%;
+    justify-content: center;
+    margin-top: 2vw;
+    margin-left: 30vw;
+    border-radius: 20px;
+    border: none;
+    transition: opacity 1000ms;
+}
+
+.hide2{
+    opacity: 0;
+}
+
 #submit-err{
     color: red;
     font-size: 0.9rem;
