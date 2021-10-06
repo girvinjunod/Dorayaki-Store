@@ -20,21 +20,23 @@
 </div>
 
 <?php 
-    if($_GET["err"]=="0"){
-    ?>
-    <div class="success-msg">
-        <p class="msg">Variant successfully added.</p>
-    </div>
+    if (isset($_GET["err"])){
+        if($_GET["err"]=="0"){
+        ?>
+        <div class="success-msg">
+            <p class="msg">Variant successfully added.</p>
+        </div>
 
-    <?php 
-    } else if ($_GET["err"]==1){ ?>
-    <div class="error-msg">
-        <p>Error in adding variant.</p>
-    </div>
+        <?php 
+        } else if ($_GET["err"]==1){ ?>
+        <div class="error-msg">
+            <p>Error in adding variant.</p>
+        </div>
 
-    <?php
+        <?php
+      }
     }
-    ?>
+?>
 
 <div class="container">
 

@@ -13,12 +13,14 @@
 <body>
 
 <?php 
-    if ($_GET["err"]==1){ ?>
-    <div class="error-msg">
-        <p>Please fill all the required fields properly before registering.</p>
-    </div>
+    if (isset($_GET["err"])){
+        if ($_GET["err"]==1){ ?>
+        <div class="error-msg">
+            <p>Please fill all the required fields properly before registering.</p>
+        </div>
 
-    <?php
+        <?php
+        }
     }
 ?>
 
