@@ -1,7 +1,8 @@
 #item-list {
-    background-color: #fde7b9c7;
+    background-color: #FDE8B9 ;
     padding-bottom: 30vh;
     display: flex;
+    padding-top: 20vh;
 }
 
 .card-list {
