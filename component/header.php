@@ -1,3 +1,15 @@
+<?php
+// $query = $_POST["query"];
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+  if ($_POST["query"]){
+    header('Location: '. "search.php?q=".$_POST["query"]);
+  } else {
+    header('Location: '. "search.php?q=");
+  }
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,10 +27,10 @@
         <nav class="navbar">
             <div class="logo">
                 <img src="../assets/img/dorayaki.svg">
-                <a href="index.html"> <h2> ApelManggaKucing </h2> </a>
+                <a href="/"> <h2> ApelManggaKucing </h2> </a>
             </div>
-            <form method="#" action="#" class="form-search">
-                <input type="text" class="navbar-input" placeholder="Search for dorayaki here">
+            <form method="POST" action="" class="form-search">
+                <input name="query" type="text" class="navbar-input" placeholder="Search for dorayaki here">
                 <button class="navbar-submit" type="submit"> <img src="../assets/img/search.svg" class="search-img"> </button>
             </form>
             <a href="#"> Daftar Pembelian </a>
