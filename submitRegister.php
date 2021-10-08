@@ -68,7 +68,7 @@ if ($email and $uname and $password and $confirmpassword){
         $db->close();
         // login
 
-        // header('Location: '. "dashboard.php");
+        header('Location: '. "index.php");
     } else {
         // echo $valEmail;
         // echo $valUname;

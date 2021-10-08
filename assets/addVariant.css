@@ -1,9 +1,9 @@
 
 
-.container{
+.containervariant{
     background-color: rgba(246, 226, 180, 1);
     height: 100%;
-    width: 100%;
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
