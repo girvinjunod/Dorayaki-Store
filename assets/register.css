@@ -1,3 +1,8 @@
+body{
+    margin:0;
+    font-family: Roboto, sans-serif;
+}
+
 .container{
     background-color: rgba(246, 226, 180, 1);
     height: 100%;

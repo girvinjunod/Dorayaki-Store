@@ -15,7 +15,7 @@
         <nav class="navbar">
             <div class="logo">
                 <img src="../assets/img/dorayaki.svg">
-                <a href="index.html"> <h2> ApelManggaKucing </h2> </a>
+                <a href="index.php"> <h2> ApelManggaKucing </h2> </a>
             </div>
             <form method="#" action="#" class="form-search">
                 <input type="text" class="navbar-input" placeholder="Search for dorayaki here">

@@ -1,0 +1,46 @@
+.riwayat-container{
+    background-color: rgba(246, 226, 180, 1);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.judul{
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.riwayat-list{
+    height: auto;
+    width: auto;
+    background: rgba(70, 12, 1, 1);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.tabel-riwayat{
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.tabel-riwayat td,th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.tabel-riwayat th {
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(209, 4, 41, 1);
+    color: white;
+}
+
+.tabel-riwayat tr:nth-child(even){background-color: #f2f2f2;}
+
+.tabel-riwayat tr:nth-child(odd){background-color: #ddd;}
