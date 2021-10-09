@@ -1,0 +1,16 @@
+body{
+  background-color: #FDE8B9 ;
+}
+.pagination{
+  display:flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  margin-bottom: 5rem;
+  margin-top: 2rem;
+}
+.pagination .option{
+  margin-left:0.5rem;
+  margin-right:0.5rem;
+}
