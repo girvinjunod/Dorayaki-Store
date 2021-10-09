@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,3 +36,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             <button class="navbar-button"> username </button>
         </nav>
      </header>
+</body>

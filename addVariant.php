@@ -3,7 +3,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/global.css">
     <link rel="stylesheet" href="assets/addVariant.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +12,9 @@
 <body>
 
 <!-- ini navbar -->
-
-<!-- placeholder navbar -->
-<div style="width:auto; background: brown; padding-top:20px; padding-bottom:20px;">
-    placeholder navbar
-</div>
+<?php
+include "component/header.php";
+?>
 
 <?php 
     if (isset($_GET["err"])){
@@ -38,7 +35,7 @@
     }
 ?>
 
-<div class="container">
+<div class="containervariant">
 
 <div class="form-register">
         <h2>Add Variant</h2>
