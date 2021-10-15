@@ -80,6 +80,12 @@ body {
     font-weight: bold;
 }
 
+.navbar-button:active {
+    background-color: #460C01;
+    columns: #FDE8B9;
+    color: white;
+}
+
 
 /* =========================
 2.3 - Paragraph
