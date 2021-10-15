@@ -15,7 +15,7 @@
     background-color: #fdfdfd;
     width: 15vw;
     border-radius: 15px;
-    font-size: 0.8em;
+    font-size: 1em;
     padding-bottom: 20px;
     margin: 20px;
 }
@@ -42,4 +42,5 @@
 
 .card .content {
   height: 4rem;
+  font-size: 1.2rem;
 }
