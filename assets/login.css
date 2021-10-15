@@ -5,7 +5,6 @@ body{
 }
 
 .container{
-    margin: ;
     display: flex;
     align-items: center;
     justify-content: space-evenly !important;
