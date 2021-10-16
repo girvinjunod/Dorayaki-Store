@@ -36,9 +36,25 @@
   margin-top: 1rem;
   float: none;
 }
+
+.pembelian .primary-button.buy{
+  width: 5rem;
+  margin-left: 4rem;
+}
+.pembelian .primary-button.operation{
+  width: 2rem;
+}
+.pembelian .primary-button.data{
+  width: 4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
 body{
   background-color: rgba(246, 226, 180, 1);
 }
 .deskripsi{
   font-weight: normal;
+}
+h2.price{
+  margin: 0;
 }
