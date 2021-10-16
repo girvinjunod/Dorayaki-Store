@@ -1,0 +1,44 @@
+.detail-container{
+  width: 60vw;
+  height: 50vh;
+  display:flex;
+  flex-direction: row;
+  margin:auto;
+  margin-top: 10rem;
+  border-radius: 10px;
+  background-color: white;
+}
+.picture img {
+  object-fit: cover;
+  height: 100%;
+  width: 25rem;
+  border-radius: 10px 0px 0px 10px;
+}
+.content{
+  width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.pembelian{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-grow: 1;
+  margin-bottom: 2rem;
+}
+.pembelian .primary-button{
+  width: 80%;
+  margin: 0;
+  margin-top: 1rem;
+  float: none;
+}
+body{
+  background-color: rgba(246, 226, 180, 1);
+}
+.deskripsi{
+  font-weight: normal;
+}
