@@ -35,6 +35,9 @@
   margin: 0;
   float: none;
 }
+.pembelian .primary-button.detail{
+  width: 20rem;
+}
 
 .pembelian .primary-button.buy{
   width: 5rem;
