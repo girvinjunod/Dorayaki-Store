@@ -33,7 +33,6 @@
 .pembelian .primary-button{
   width: 80%;
   margin: 0;
-  margin-top: 1rem;
   float: none;
 }
 
@@ -43,6 +42,11 @@
 }
 .pembelian .primary-button.operation{
   width: 2rem;
+  height: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
 }
 .pembelian .primary-button.data{
   width: 4rem;
@@ -54,6 +58,19 @@ body{
 }
 .deskripsi{
   font-weight: normal;
+}
+.data{
+  height: 2rem;
+  width: 4rem;
+  text-align: center;
+  padding: 0;
+  color: black;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  background-color: none;
+  border: none;
+  font-size: 1.5rem;
+  pointer-events: none;
 }
 h2.price{
   margin: 0;
