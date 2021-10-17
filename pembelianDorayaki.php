@@ -48,6 +48,7 @@ include "component/header.php";
                   
           $image = '<img src='.$cek["gambar"].' alt="">';
           $stok = $cek["stok"];
+          $harga = $cek["harga"];
         }
         
       ?>
@@ -60,24 +61,47 @@ include "component/header.php";
       <!-- <div class="pembelian"> -->
         <!-- <button onclick="console.log(document.getElementById('number').innerHTML)">Mangga</button> -->
         <form class="pembelian" action="checkPembelian.php" method="POST">
-          <div class="primary-button operation" onclick="decreaseItem()">-</div>
-          <input name="jumlahBarang" id="number" type="text" class="data" value="0"></input>
+          <div id="decreaseButton" class="primary-button operation" onclick="decreaseItem()">-</div>
+          <input name="jumlahBarang" id="number" type="text" class="data" value="1"></input>
           <input name="idVarian" type="hidden" value="<?php echo $_GET['id'] ?>"></input>
-          <div class="primary-button operation" onclick="increaseItem()">+</div>
-          <button class="primary-button buy">Buy</button>
+          <div id="increaseButton" class="primary-button operation" onclick="increaseItem()">+</div>
+          <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input>
+          <button id="buyButton" class="primary-button buy">Buy</button>
         </form>
         <script>
           function decreaseItem(){
             var number = document.getElementById('number').value;
-            if (number > 0){
-              document.getElementById('number').value = parseInt(number)-1;
+            const harga = <?php echo $harga ?>;
+            number = parseInt(number) - 1;
+            if (number >= 0){
+              document.getElementById('number').value = parseInt(number);
+              document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
+              if (number == 0){
+                document.getElementById('decreaseButton').classList.add('disabled');
+                document.getElementById('buyButton').classList.add('disabled');
+              } else {
+                document.getElementById('increaseButton').classList.remove('disabled');
+                
+              }
             }
 
           }
           function increaseItem(){
             var number = document.getElementById('number').value;
-            if (number < <?php echo $stok ?>){
-              document.getElementById('number').value = parseInt(number)+1;
+            const harga = <?php echo $harga ?>;
+            number = parseInt(number) + 1;
+            if (number <= <?php echo $stok ?>){
+              document.getElementById('number').value = parseInt(number);
+              document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
+              if (number == <?php echo $stok ?>){
+                document.getElementById('increaseButton').classList.add('disabled');
+                
+              } else {
+                document.getElementById('decreaseButton').classList.remove('disabled');
+                document.getElementById('buyButton').classList.remove('disabled');
+                
+                
+              }
             }
           }
           function getStockData(){
