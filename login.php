@@ -1,16 +1,23 @@
+<?php
+session_start();
+
+if (isset($_SESSION["username"])){
+    header('Location: '. "index.php");
+  }
+
+?>
+
+
+
 <head>
     <link rel="stylesheet" href="assets/global.css">
     <link rel="stylesheet" href="assets/login.css">
     <title>Login</title>
 </head>
 
-<?php
-    include "component/header.php";
-?>
-
     <div class="container">
         <div class="gambar">
-            <img src="assets/img/register.png" alt="doraemon buka pintu" class="doraemon">
+            <img src="assets/img/doraemon3.png" alt="doraemon terbang" class="doraemon">
         </div>
 
         <div class="form-register">
@@ -31,6 +38,3 @@
             </form>
         </div>
     </div>
-<?php
-    include "component/footer.php";
-?>

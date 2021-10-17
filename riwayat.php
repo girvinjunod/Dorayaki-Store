@@ -18,14 +18,28 @@ include "component/header.php";
 
 <div class="riwayat-container">
     <div class="riwayat-list">
-        <h2 class="judul">Riwayat Perubahan Stok/Pembelian</h2>
+        <?php
+            if ($_SESSION['isAdmin']){
+        ?>
+            <h2 class="judul">Stock History</h2>
+        <?php
+            } else{
+        ?>
+            <h2 class="judul">Purchase History</h2>
+        <?php
+            }
+        ?>
         <table class="tabel-riwayat">
-        <tr>
-            <th>Nama Varian</th>
+        <?php
+            if ($_SESSION['isAdmin']){
+        ?>
+            
+            <tr>
+            <th>Variant Name</th>
             <th>Username</th>
-            <th>Jumlah</th>
-            <th>Harga</th>
-            <th>Waktu</th>
+            <th>Stock Change</th>
+            <th>Price</th>
+            <th>Time</th>
         </tr>
         <?php
             $db = new SQLite3('db/doraemon.db');
@@ -38,6 +52,36 @@ include "component/header.php";
                 echo "<td>" . $row["harga"] . "</td>";
                 echo "<td>" . $row["waktu"] . "</td>";
                 echo "</tr>";
+            }
+        ?>
+
+        <?php
+            } else{
+        ?>
+          <tr>
+            <th>Variant Name</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Time</th>
+        </tr>
+        <?php
+            $db = new SQLite3('db/doraemon.db');
+            $res = $db->query('SELECT * FROM riwayat, user 
+            where riwayat.username = user.username and is_admin = 0 
+            ORDER BY waktu desc');
+            while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+                echo "<tr>";
+                echo "<td>" . $row["varian"] . "</td>";
+                echo "<td>" . abs($row["perubahan"]) . "</td>";
+                echo "<td>" . $row["harga"] . "</td>";
+                echo "<td>" . $row["waktu"] . "</td>";
+                echo "</tr>";
+            }
+        ?>  
+
+
+
+        <?php
             }
         ?>
 

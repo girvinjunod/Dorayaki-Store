@@ -10,7 +10,7 @@
         } else {
             # echo "a"; 
             # $res = $db->prepare('SELECT * FROM user where (?, ?)');
-            $statement = $db->prepare('SELECT username FROM user WHERE email = :email AND password = :password');
+            $statement = $db->prepare('SELECT username, is_admin FROM user WHERE email = :email AND password = :password');
             $statement->bindValue(':email', $email);
             $statement->bindValue(':password', $password);
             $result = $statement->execute();
@@ -18,6 +18,7 @@
             if ($account != false) {
                 $_SESSION['loginstate'] = true;
                 $_SESSION['username'] = $account["username"];
+                $_SESSION['isAdmin'] = $account["is_admin"];
                 header('Location:index.php?login-success');
             } else {
                 # invalid username / pass

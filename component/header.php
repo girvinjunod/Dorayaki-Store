@@ -1,5 +1,6 @@
 <?php
     session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -28,13 +29,41 @@
                 <input type="text" class="navbar-input" placeholder="Search for dorayaki here">
                 <button class="navbar-submit" type="submit"> <img src="../assets/img/search.svg" class="search-img"> </button>
             </form>
-            <a href="#"> Daftar Pembelian </a>
             <?php
-                if ($_SESSION['loginstate'] == false) {
-                    echo '<a href="login.php"> <button class="navbar-button"> LOGIN </button> </a>';
-                } else {
-                    echo '<button class="navbar-button">'.$_SESSION['username'].'</button>';
+                if ($_SESSION['isAdmin']){
+            ?>
+                <a href="addVariant.php"> Add Variant </a>
+            <?php
+                } else{
+            ?>
+                <a href="riwayat.php"> Purchase History </a>
+            <?php
                 }
             ?>
+            <div class="dropdown">
+                <?php
+                    echo '<button class="navbar-button">'.$_SESSION['username'].'</button>';
+                ?>
+                <div class="dropdown-content hide-dropdown">
+                <form action="logout.php" method="post">
+                    <input type="submit" class="logout-btn" value=" Logout "/>
+                </form>
+                </div>
+            </div>
+        <script>
+            const dropdown = document.querySelector('.dropdown');
+            const content = document.querySelector('.dropdown-content');
+
+            dropdown.addEventListener('mouseover', () => {
+                console.log("Masuk dropdown");
+                content.classList.toggle('hide-dropdown');
+            })
+
+            dropdown.addEventListener('mouseout', () => {
+                console.log("Keluar dropdown");
+                content.classList.toggle('hide-dropdown');
+            })
+        </script>
+         
         </nav>
      </header>
