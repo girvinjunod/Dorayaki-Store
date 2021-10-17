@@ -63,7 +63,7 @@
     }
   }
   $next_id = $halaman + 1;
-  if ($next_id == $total_page + 1){
+  if ($next_id == $total_page + 1 || $total_page==0){
     $page_link .= '<div class="option disabled"><a href="">Next</a></div>';
   } else{
     $page_link .= '<div class="option"><a href="javascript:load_data('.$next_id.')">Next</a></div>';
