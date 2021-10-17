@@ -40,7 +40,7 @@
               input += '<div class="title"><h6>'+(dataItem[count]["nama"].slice(0,15) + (dataItem[count]["nama"].length > 15 ? "..." : ""))+'</h6></div>';
               input += '<div class="subtitle"><h6>Rp. '+dataItem[count]["harga"]+'</h6></div>';
               input += '<div class="content"><h6>'+(dataItem[count]["deskripsi"].slice(0,100) + (dataItem[count]["deskripsi"].length > 100 ? "..." : ""))+'</h6></div>';
-              input += '<button class="primary-button"> BUY </button>'
+              input += '<a href="pembelianDorayaki.php?id='+dataItem[count]["id"]+'"><button class="primary-button">BUY</button></a>'
               input += '</div>';
               input += '</div>';
             }

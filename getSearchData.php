@@ -13,7 +13,6 @@
     $querySearchData->bindParam(2,$offset);
     $searchResult = $querySearchData->execute();
     
-
     $queryJumlahData = $db->prepare("select COUNT(*) from dorayaki where nama LIKE ?");
     $queryJumlahData->bindParam(1,$query);
     $jumlahData = $queryJumlahData->execute();
