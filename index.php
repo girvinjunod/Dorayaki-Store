@@ -1,6 +1,14 @@
 <?php
 include "component/header.php";
 ?>
+<?php
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+  }
+
+?>
+
+
 
  <!-- Start of Dashboard -->
 <section class="dashboard">

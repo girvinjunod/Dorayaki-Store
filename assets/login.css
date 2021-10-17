@@ -5,9 +5,12 @@ body{
 }
 
 .container{
+    background-color: rgba(246, 226, 180, 1);
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly !important;
+    justify-content: space-evenly;
 }
 
 .gambar{
@@ -15,7 +18,7 @@ body{
 }
 
 .doraemon{
-    max-width: 100%;
+    max-width: 85%;
     height: auto;
 }
 

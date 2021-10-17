@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+  }
+if (!$_SESSION['isAdmin']){
+    header('Location: '. "index.php");
+}
+
+?>
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -193,6 +205,3 @@ include "component/header.php";
 
 </body>
 </html>
-
-
-<!-- Dorayaki that tastes like dorayaki. Truly this is the greatest idea of the century! -->
