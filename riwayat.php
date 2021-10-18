@@ -46,13 +46,14 @@ include "component/header.php";
             $res = $db->query('SELECT * FROM riwayat ORDER BY waktu desc');
             while($row = $res->fetchArray(SQLITE3_ASSOC)) {
                 echo "<tr>";
-                echo "<td>" . $row["varian"] . "</td>";
+                echo "<td>" . "<a href='" . "pembelianDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
                 echo "<td>" . $row["username"] . "</td>";
                 echo "<td>" . $row["perubahan"] . "</td>";
                 echo "<td>" . $row["harga"] . "</td>";
                 echo "<td>" . $row["waktu"] . "</td>";
                 echo "</tr>";
             }
+            $db->close();
         ?>
 
         <?php
@@ -66,17 +67,24 @@ include "component/header.php";
         </tr>
         <?php
             $db = new SQLite3('db/doraemon.db');
-            $res = $db->query('SELECT * FROM riwayat, user 
-            where riwayat.username = user.username and is_admin = 0 
+            // $res = $db->query('SELECT * FROM riwayat, user 
+            // where riwayat.username = user.username and is_admin = 0 
+            // ORDER BY waktu desc');
+            $prep = $db->prepare('SELECT * FROM riwayat, user 
+            where riwayat.username = user.username and is_admin = 0 and user.username = ? 
             ORDER BY waktu desc');
+            $prep->bindParam(1, $uname);
+            $uname = $_SESSION['username'];
+            $res = $prep->execute();
             while($row = $res->fetchArray(SQLITE3_ASSOC)) {
                 echo "<tr>";
-                echo "<td>" . $row["varian"] . "</td>";
+                echo "<td>" . "<a href='" . "pembelianDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
                 echo "<td>" . abs($row["perubahan"]) . "</td>";
                 echo "<td>" . $row["harga"] . "</td>";
                 echo "<td>" . $row["waktu"] . "</td>";
                 echo "</tr>";
             }
+            $db->close();
         ?>  
 
 

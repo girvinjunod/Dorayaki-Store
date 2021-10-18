@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                 if ($_SESSION['isAdmin']){
             ?>
                 <a href="addVariant.php"> Add Variant </a>
+                <a href="riwayat.php"> Stock History </a>
             <?php
                 } else{
             ?>
