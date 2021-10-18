@@ -46,150 +46,46 @@ if (!isset($_SESSION["username"])){
  <section id="item-list">
     <div class="container">
         <div class="card-list">
-            <div class="card">
-                <img src="https://dummyimage.com/600x600/000/fff">
-                <div class="card-content">
-                    <div class="title">
-                        <h6> Dorayaki </h6>
-                    </div>
-                    <div class="subtitle">
-                        <h6> Rp 5.000,00-</h6>
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                    </div>
-                    <button class="primary-button">
-                        BUY
-                    </button>
-                </div>
-            </div>
+          <?php
+            $db = new SQLite3('db/doraemon.db');
+            $querySearchData = $db->prepare("SELECT * from dorayaki ORDER BY total_penjualan desc LIMIT 8;");
+            $searchResult = $querySearchData->execute();
+            while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
+              ?>
+              <div class="card">
+                  <img src="<?php echo $cek['gambar'] ?>">
+                  <div class="card-content">
+                      <div class="title">
+                          <h6>
+                          <?php  
+                            if (strlen($cek['nama']) >= 15){
+                              echo substr($cek['nama'],0,15).'...' ;
+                            } else{
+                              echo $cek['nama'];
+                            }
+                          ?> 
+                          </h6>
+                      </div>
+                      <div class="subtitle">
+                          <h6> Rp <?php echo $cek['harga']  ?></h6>
+                      </div>
+                      <div class="content">
+                        <h6>
+                      <?php  
+                      if (strlen($cek['deskripsi']) >= 100){
+                        echo substr($cek['deskripsi'],0,100).'...' ;
+                      } else{
+                        echo $cek['deskripsi'];
+                      }
+                      ?> 
+                      </h6>
+                      </div>
+                      <a href="pembelianDorayaki.php?id=<?php echo $cek["id"] ?>"><button class="primary-button">BUY</button></a>
+                  </div>
+              </div>
+            <?php } 
 
-            <div class="card">
-                <img src="https://dummyimage.com/600x600/000/fff">
-                <div class="card-content">
-                    <div class="title">
-                        <h6> Dorayaki </h6>
-                    </div>
-                    <div class="subtitle">
-                        <h6> Rp 5.000,00-</h6>
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                    </div>
-                    <button class="primary-button">
-                        BUY
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://dummyimage.com/600x600/000/fff">
-                <div class="card-content">
-                    <div class="title">
-                        <h6> Dorayaki </h6>
-                    </div>
-                    <div class="subtitle">
-                        <h6> Rp 5.000,00-</h6>
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                    </div>
-                    <button class="primary-button">
-                        BUY
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://dummyimage.com/600x600/000/fff">
-                <div class="card-content">
-                    <div class="title">
-                        <h6> Dorayaki </h6>
-                    </div>
-                    <div class="subtitle">
-                        <h6> Rp 5.000,00-</h6>
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                    </div>
-                    <button class="primary-button">
-                        BUY
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://dummyimage.com/600x600/000/fff">
-                <div class="card-content">
-                    <div class="title">
-                        <h6> Dorayaki </h6>
-                    </div>
-                    <div class="subtitle">
-                        <h6> Rp 5.000,00-</h6>
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                    </div>
-                    <button class="primary-button">
-                        BUY
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://dummyimage.com/600x600/000/fff">
-                <div class="card-content">
-                    <div class="title">
-                        <h6> Dorayaki </h6>
-                    </div>
-                    <div class="subtitle">
-                        <h6> Rp 5.000,00-</h6>
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                    </div>
-                    <button class="primary-button">
-                        BUY
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://dummyimage.com/600x600/000/fff">
-                <div class="card-content">
-                    <div class="title">
-                        <h6> Dorayaki </h6>
-                    </div>
-                    <div class="subtitle">
-                        <h6> Rp 5.000,00-</h6>
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                    </div>
-                    <button class="primary-button">
-                        BUY
-                    </button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://dummyimage.com/600x600/000/fff">
-                <div class="card-content">
-                    <div class="title">
-                        <h6> Dorayaki </h6>
-                    </div>
-                    <div class="subtitle">
-                        <h6> Rp 5.000,00-</h6>
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                    </div>
-                    <button class="primary-button">
-                        BUY
-                    </button>
-                </div>
-            </div>
-
+          ?>
         </div>
     </div>
 </section>
