@@ -23,8 +23,9 @@ include "component/header.php";
         $searchResult = $querySearchData->execute();
         while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
           $data = '<h1>'.$cek["nama"].'</h1>
-                  <h2>Rp. '.$cek["harga"].'</h2>
-                  <h4 class="deskripsi">'.$cek["deskripsi"].'</h4> ';
+          <h2 class="price">Rp. <span id="hargaDorayaki">'.$cek["harga"].'</span></h2>
+          <h3 >Stok : <span id="dataStok">'.$cek["stok"].'</span></h3>
+          <h4 class="deskripsi">'.$cek["deskripsi"].'</h4> ';
           $image = '<img src='.$cek["gambar"].' alt="">';
         }
         
@@ -36,7 +37,7 @@ include "component/header.php";
     <div class="content">
       <?php echo $data ?>
       <div class="pembelian">
-        <button class="primary-button">Buy</button>
+        <a href="pembelianDorayaki.php?id=<?php echo $id ?>"><button class="primary-button detail">Buy</button></a>
       </div>
     </div>
   </div>

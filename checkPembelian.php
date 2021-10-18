@@ -13,15 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST'){
   $id = $_POST["idVarian"];
   $jumlah = $_POST["jumlahBarang"];
-  $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok + ? WHERE id = ?");
-  // CEK ADMIN
-  $jumlah = -1*$jumlah; // JIKA PESERTA
-  // DO NOTHIN JIKA ADMIN
+  $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok - ? WHERE id = ?");
+  $queryUpdateTotalPenjualan = $db->prepare("UPDATE dorayaki SET total_penjualan = total_penjualan + ? WHERE id = ?");
 
   $queryUpdateData->bindParam(1,$jumlah);
+  $queryUpdateTotalPenjualan->bindParam(1,$jumlah);
   $queryUpdateData->bindParam(2,$id);
+  $queryUpdateTotalPenjualan->bindParam(2,$id);
   $updateResult = $queryUpdateData->execute();
-  if ($updateResult){
+  $updateTotalPenjualanResult = $queryUpdateTotalPenjualan->execute();
+  if ($updateResult && $updateTotalPenjualanResult){
     echo "success";
     header('Location: '. "pembelianDorayaki.php?id=".$id."&err=0");
   } else {

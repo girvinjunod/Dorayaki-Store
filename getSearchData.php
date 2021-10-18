@@ -13,7 +13,6 @@
     $querySearchData->bindParam(2,$offset);
     $searchResult = $querySearchData->execute();
     
-
     $queryJumlahData = $db->prepare("select COUNT(*) from dorayaki where nama LIKE ?");
     $queryJumlahData->bindParam(1,$query);
     $jumlahData = $queryJumlahData->execute();
@@ -64,7 +63,7 @@
     }
   }
   $next_id = $halaman + 1;
-  if ($next_id == $total_page + 1){
+  if ($next_id == $total_page + 1 || $total_page==0){
     $page_link .= '<div class="option disabled"><a href="">Next</a></div>';
   } else{
     $page_link .= '<div class="option"><a href="javascript:load_data('.$next_id.')">Next</a></div>';

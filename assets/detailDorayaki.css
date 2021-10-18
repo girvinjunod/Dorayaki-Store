@@ -35,10 +35,15 @@
   margin: 0;
   float: none;
 }
+.pembelian .primary-button.detail{
+  width: 20rem;
+}
 
 .pembelian .primary-button.buy{
   width: 5rem;
-  margin-left: 4rem;
+  margin-left: 2rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
 }
 .pembelian .primary-button.operation{
   width: 2rem;
@@ -72,6 +77,16 @@ body{
   font-size: 1.5rem;
   pointer-events: none;
 }
+
+.totalprice{
+  width: 10rem;
+  font-size: 1.5rem;
+}
 h2.price{
   margin: 0;
+}
+
+.disabled{
+  pointer-events: none;
+  opacity: 0.6;
 }
