@@ -11,6 +11,12 @@
   <title>Search Result</title>
 </head>
 <body>
+<?php
+session_start();
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+}
+?>
 <script>
       function load_data(page_number){
         var form_data = new FormData();
@@ -40,7 +46,7 @@
               input += '<div class="title"><h6>'+(dataItem[count]["nama"].slice(0,15) + (dataItem[count]["nama"].length > 15 ? "..." : ""))+'</h6></div>';
               input += '<div class="subtitle"><h6>Rp. '+dataItem[count]["harga"]+'</h6></div>';
               input += '<div class="content"><h6>'+(dataItem[count]["deskripsi"].slice(0,100) + (dataItem[count]["deskripsi"].length > 100 ? "..." : ""))+'</h6></div>';
-              input += '<a href="pembelianDorayaki.php?id='+dataItem[count]["id"]+'"><button class="primary-button">BUY</button></a>'
+              input += '<a href="detailDorayaki.php?id='+dataItem[count]["id"]+'"><button class="primary-button">BUY</button></a>'
               input += '</div>';
               input += '</div>';
             }
