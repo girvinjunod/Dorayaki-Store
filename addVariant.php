@@ -1,15 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION["username"])){
-    header('Location: '. "login.php");
-  }
-if (!$_SESSION['isAdmin']){
-    header('Location: '. "index.php");
-}
-
-?>
-
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,6 +14,16 @@ if (!$_SESSION['isAdmin']){
 <!-- ini navbar -->
 <?php
 include "component/header.php";
+?>
+
+<?php
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+  }
+if (!$_SESSION['isAdmin']){
+    header('Location: '. "index.php");
+}
+
 ?>
 
 <?php 
@@ -177,26 +175,28 @@ include "component/header.php";
     }
 
     <?php 
-    if($_GET["err"]=="0"){
-    ?>
-    setTimeout( function() {
-        
-        var sign = document.querySelector(".success-msg");
-        sign.classList.add("hide2");
-    } ,
-    5000)
+    if (isset($_GET["err"])){
+        if($_GET["err"]=="0"){
+        ?>
+        setTimeout( function() {
+            
+            var sign = document.querySelector(".success-msg");
+            sign.classList.add("hide2");
+        } ,
+        5000)
 
-    <?php 
-    } else if ($_GET["err"]==1){ ?>
-    setTimeout( function() {
-        
-        var sign = document.querySelector(".error-msg");
-        sign.classList.add("hide2");
-    } ,
-    5000)
+        <?php 
+        } else if ($_GET["err"]==1){ ?>
+        setTimeout( function() {
+            
+            var sign = document.querySelector(".error-msg");
+            sign.classList.add("hide2");
+        } ,
+        5000)
 
 
     <?php
+        }
     }
     ?>
 
