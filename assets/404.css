@@ -1,0 +1,15 @@
+.err-container{
+    background-color: rgba(246, 226, 180, 1);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.err-msg{
+    font-size: 25px;
+    color: #460C01;
+    font-weight: bold;
+}
