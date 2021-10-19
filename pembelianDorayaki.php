@@ -12,6 +12,17 @@
 </head>
 <body>
 <?php
+session_start();
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+}
+if (!$_SESSION['isAdmin']){
+    $isAdmin = 0;
+}else{
+    $isAdmin = 1;
+}
+?>
+<?php
 include "component/header.php";
 ?>  
 <?php 
@@ -52,13 +63,28 @@ include "component/header.php";
         }
         
       ?>
+      <div id="popupModal" class="modal">
+      <form class="modal-content" action="checkPembelian.php"  method="POST" onsubmit="showPopup()">
+      <h1>Are you sure u want delete this variant?</h1>      
+      <input type="hidden"  value="<?php echo $_GET['id'] ?>"></input>
+            <input type="hidden" name="delete" value="<?php echo $_GET['id'] ?>"></input>
+            <button id="deleteButton" class="primary-button confirmation">Delete Variant</button>
+            <button type="button" class="primary-button buy" onclick="document.getElementById('popupModal').style.display='none'">Cancel</button>
+          </form>
+      </div>
   <div class="detail-container">
     <div class="picture">
       <?php echo $image ?>
     </div>
     <div class="content">
+    <?php if ($isAdmin){ ?>
+      <div class="delete-button" >
+            <button id="deleteButton" class="primary-button delete" onclick="document.getElementById('popupModal').style.display='block'">Delete Variant</button>
+            <a href="editDorayaki.php?id=<?php echo $_GET['id'] ?>"><button id="editButton" class="primary-button edit">Edit</button></a>
+      </div>
+      <?php } ?>
       <?php echo $data ?>
-      <!-- <div class="pembelian"> -->
+      <!-- <div class="pembelian"> -->            
         <!-- <button onclick="console.log(document.getElementById('number').innerHTML)">Mangga</button> -->
         <form class="pembelian" action="checkPembelian.php" method="POST">
           <div id="decreaseButton" class="primary-button operation" onclick="decreaseItem()">-</div>
@@ -66,8 +92,13 @@ include "component/header.php";
           <input name="idVarian" type="hidden" value="<?php echo $_GET['id'] ?>"></input>
           <div id="increaseButton" class="primary-button operation" onclick="increaseItem()">+</div>
           <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input>
+          <?php if ($isAdmin){ ?>
+          <button name="buy" id="buyButton" class="primary-button buy">Add </button>
+            <?php } else { ?>
           <button id="buyButton" class="primary-button buy">Buy</button>
         </form>
+            <?php } ?>
+        
         <script>
           function decreaseItem(){
             var number = document.getElementById('number').value;
@@ -90,18 +121,15 @@ include "component/header.php";
             var number = document.getElementById('number').value;
             const harga = <?php echo $harga ?>;
             number = parseInt(number) + 1;
-            if (number <= <?php echo $stok ?>){
+            if (number <= <?php echo $stok ?> || <?php echo ($isAdmin) ?>){
               document.getElementById('number').value = parseInt(number);
               document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
-              if (number == <?php echo $stok ?>){
-                document.getElementById('increaseButton').classList.add('disabled');
-                
-              } else {
-                document.getElementById('decreaseButton').classList.remove('disabled');
-                document.getElementById('buyButton').classList.remove('disabled');
-                
-                
-              }
+                if (number == <?php echo $stok ?> && <?php echo ($isAdmin) ?> == 0){
+                    document.getElementById('increaseButton').classList.add('disabled');
+                } else {
+                    document.getElementById('decreaseButton').classList.remove('disabled');
+                    document.getElementById('buyButton').classList.remove('disabled');
+                }
             }
           }
           function getStockData(){
@@ -123,6 +151,11 @@ include "component/header.php";
               getStockData();
             }, 5000);
           }
+
+          function showPopup(){
+
+          }
+
           getStockDataBerkala();
 
           <?php 
