@@ -2,10 +2,7 @@
 2.2 - Dashboard
 ========================= */
 .dashboard {
-    flex-wrap: wrap;
-    background-color: #FDE8B9;
-    height: 70vh;
-}
-
-.flat img {
+  flex-wrap: wrap;
+  background-color: #fde8b9;
+  height: 70vh;
 }

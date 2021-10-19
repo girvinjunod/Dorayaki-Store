@@ -55,7 +55,8 @@ if ($email and $uname and $password and $confirmpassword){
             $prep = $db->prepare("INSERT INTO user(email, username, password, is_admin) VALUES (?, ?, ?, ?)");
             $prep->bindParam(1, $email);
             $prep->bindParam(2, $uname);
-            $prep->bindParam(3, $password);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $prep->bindParam(3, $hashedPassword);
             $prep->bindParam(4, $admin);
             $admin = 0;
             $res = $prep->execute();
