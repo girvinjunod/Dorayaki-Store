@@ -68,7 +68,10 @@ if ($email and $uname and $password and $confirmpassword){
          }
         $db->close();
         // login
-
+        session_start();
+        $_SESSION['loginstate'] = true;
+        $_SESSION['username'] = $uname;
+        $_SESSION['isAdmin'] = 0;
         header('Location: '. "index.php");
     } else {
         // echo $valEmail;
