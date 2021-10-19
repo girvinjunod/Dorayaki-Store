@@ -55,11 +55,6 @@ body{
     padding-left: 2px;
 }
 
-#info-label {
-    color: #f4f4f4;
-    font-weight: bold;
-}
-
 .hide{
     display: none;
 }
