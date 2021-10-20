@@ -3,6 +3,7 @@
   if (isset($_POST)){
     $db = new SQLite3('db/doraemon.db');
     $nama = $_POST['nama'];
+    $id = $_POST['id'];
     echo $nama;
     $deskripsi = $_POST['deskripsi'];
     $harga = $_POST['harga'];

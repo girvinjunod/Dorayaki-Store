@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Dorayaki</title>
+  <title>Pembelian Dorayaki</title>
   <link rel="stylesheet" href="assets/detailDorayaki.css">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/itemlist.css">
@@ -40,7 +40,11 @@ include "component/header.php";
         </div>
 
         <?php
-      }
+        } else if ($_GET["err"]==2){ ?>
+        <div class="error-msg delete-msg">
+            <p>Delete Variant Failed, please try again</p>
+        </div>      
+        <?php }
     }
 ?>
       <?php       
@@ -51,6 +55,9 @@ include "component/header.php";
         $querySearchData = $db->prepare("select * from dorayaki where id = ?");
         $querySearchData->bindParam(1,$id);
         $searchResult = $querySearchData->execute();
+        if (!$searchResult){
+          header('Location: '. "index.php");
+        }
         while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
           $data = '<h1>'.$cek["nama"].'</h1>
                   <h2 class="price">Rp. <span id="hargaDorayaki">'.$cek["harga"].'</span></h2>
@@ -173,6 +180,12 @@ include "component/header.php";
                 sign.classList.add("hide2");
             } ,
             5000)
+            <?php
+            } else if ($_GET["err"]==2){ ?>
+              setTimeout( function() {
+                  var sign = document.querySelector(".error-msg.delete-msg");
+                  sign.classList.add("hide2");
+              } ,
             <?php
             }
           ?>
