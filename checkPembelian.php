@@ -12,17 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
   }
   echo $data;
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-  $id = $_POST["idVarian"];
-  $jumlah = $_POST["jumlahBarang"];
-  $uname = $_SESSION["username"];
-  $ambildata = $db->prepare("select * from dorayaki where id = ?");
-  $ambildata->bindParam(1, $id);
-  $datavarian = $ambildata->execute();
-  while($row = $datavarian->fetchArray(SQLITE3_ASSOC)) {
-    $namavarian = $row["nama"];
-    $harga = $row["harga"] * $jumlah;
+  if(!$_POST["delete"]){
+    $id = $_POST["idVarian"];
+    $jumlah = $_POST["jumlahBarang"];
+    $uname = $_SESSION["username"];
+    $ambildata = $db->prepare("select * from dorayaki where id = ?");
+    $ambildata->bindParam(1, $id);
+    $datavarian = $ambildata->execute();
+    while($row = $datavarian->fetchArray(SQLITE3_ASSOC)) {
+      $namavarian = $row["nama"];
+      $harga = $row["harga"] * $jumlah;
+    }
+  } else{
+    $id = $_POST["delete"];
   }
-  
 
   if (!$_SESSION['isAdmin']){
     $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok - ? WHERE id = ?");
@@ -56,6 +59,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
     }
   } else {
       if($_POST["delete"]){
+        $queryDeleteVariant = $db->prepare("DELETE FROM dorayaki WHERE id = ?");
+        $queryDeleteRiwayatVariant = $db->prepare("DELETE FROM riwayat WHERE id_varian = ?");
+        $queryDeleteVariant->bindParam(1,$id);
+        $queryDeleteRiwayatVariant->bindParam(1,$id);
+        $deleteResult = $queryDeleteVariant->execute();
+        $deleteRiwayatResult = $queryDeleteRiwayatVariant->execute();
+        if ($deleteResult && $deleteRiwayatResult){
+          header('Location: '. "index.php");
+        }
+        else{
+          header('Location: '. "pembelianDorayaki.php?id=".$id."&err=2");
+        }
         echo "mangga"; // delete variant
       } else {
         $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok + ? WHERE id = ?");

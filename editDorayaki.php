@@ -51,8 +51,12 @@ if (!$_SESSION['isAdmin']){
 <div class="form-register">
         <h2>Edit Variant</h2>
 
-        <form action="submitEditDorayaki.php" method="POST" class="form" ">
+        <form action="submitEditDorayaki.php" method="POST" class="form" >
         <?php 
+          $id = 0;
+          $nama = '';
+          $deskripsi = '';
+          $harga = 0;
           if (isset($_GET['id'])){
             $id = $_GET['id'] ;
             echo $id;
@@ -60,6 +64,9 @@ if (!$_SESSION['isAdmin']){
             $querySearchData = $db->prepare("select * from dorayaki where id = ?");
             $querySearchData->bindParam(1,$id);
             $searchResult = $querySearchData->execute();
+            if (!$searchResult){
+              header('Location: '. "index.php");
+            }
             while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
               $nama = $cek['nama'];
               $deskripsi = $cek['deskripsi'];
@@ -72,17 +79,17 @@ if (!$_SESSION['isAdmin']){
         
         ?>
             <input type="text" name="nama" id="nama"
-            placeholder="Variant Name" onblur="valName(this.value);" value="<?php echo $nama ?>">
+            placeholder="Variant Name"  value="<?php echo $nama ?>">
             <label for="nama" class="name-err hide label">Please fill the name field.</label>
 
-            <textarea name="deskripsi" id="deskripsi" onblur="valDesc(this.value);" placeholder="Description"> <?php echo $deskripsi ?></textarea>
+            <textarea name="deskripsi" id="deskripsi"  placeholder="Description"> <?php echo $deskripsi ?></textarea>
             <label for="deskripsi" class="desc-err hide label">Please fill the description field.</label>
             
             <input type="number" name="harga" id="harga" min="0"
-            placeholder="Variant Price" onblur="valPrice(this.value);" value="<?php echo $harga ?>">
+            placeholder="Variant Price"  value="<?php echo $harga ?>">
             <label for="harga" class="price-err hide label">Please fill the price field.</label>
             
-            <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>"></input>
+            <input type="hidden" name="id" value="<?php echo $id ?>"></input>
             <!-- <input type="number" name="stock" id="stock" min="0"
             placeholder="Initial Stock" onblur="valStock(this.value)"> 
             <label for="stock" class="stock-err hide label">Please fill the stock field.</label> -->
