@@ -2,14 +2,14 @@
   session_start();
   if (isset($_POST)){
     $db = new SQLite3('db/doraemon.db');
-    echo "hai" . $_FILES["img"]["name"] . "<br>";
-    $img = getimagesize($_FILES["img"]["tmp_name"]);
-    echo $img;
     $nama = $_POST['nama'];
     $id = $_POST['id'];
     $deskripsi = $_POST['deskripsi'];
     $harga = $_POST['harga'];
-    $img = getimagesize($_FILES["img"]["tmp_name"]);
+    $img = false;
+    if ($_FILES["img"]["tmp_name"]){
+      $img = getimagesize($_FILES["img"]["tmp_name"]);
+    }
     if ($img){
       $target_dir = "db/img/";
       $target_file = $target_dir . $id . ".";
