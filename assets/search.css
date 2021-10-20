@@ -40,3 +40,7 @@ body{
 .pagination .active{
   background-color: blueviolet;
 }
+.not-found{
+  margin-top: 2em;
+  margin-bottom: 2em;
+}

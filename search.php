@@ -50,6 +50,9 @@ if (!isset($_SESSION["username"])){
               input += '</div>';
               input += '</div>';
             }
+          if (input == ''){
+            input = "<h1 class='not-found'>Product not Found</h1>"
+          }
           document.getElementById('itemData').innerHTML = input;
           document.getElementById('paginationData').innerHTML = data.pagination;
         }
