@@ -59,7 +59,6 @@ if (!$_SESSION['isAdmin']){
           $harga = 0;
           if (isset($_GET['id'])){
             $id = $_GET['id'] ;
-            echo $id;
             $db = new SQLite3('db/doraemon.db');
             $querySearchData = $db->prepare("select * from dorayaki where id = ?");
             $querySearchData->bindParam(1,$id);
@@ -72,7 +71,6 @@ if (!$_SESSION['isAdmin']){
               $deskripsi = $cek['deskripsi'];
               $harga = $cek['harga'];
             }
-            echo $harga;
           }else {
             // header('Location: '. "index.php");
           }
