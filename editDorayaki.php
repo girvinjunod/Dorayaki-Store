@@ -63,14 +63,16 @@ if (!$_SESSION['isAdmin']){
             $querySearchData = $db->prepare("select * from dorayaki where id = ?");
             $querySearchData->bindParam(1,$id);
             $searchResult = $querySearchData->execute();
-            if (!$searchResult){
-              header('Location: '. "index.php");
-            }
+            $dataExist = false;
             while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
               $nama = $cek['nama'];
               $deskripsi = $cek['deskripsi'];
               $harga = $cek['harga'];
+              $dataExist = true;
             }
+            if (!$dataExist){
+              header('Location: '. "index.php");
+            }  
           }else {
             // header('Location: '. "index.php");
           }
