@@ -51,7 +51,7 @@ if (!$_SESSION['isAdmin']){
 <div class="form-register">
         <h2>Edit Variant</h2>
 
-        <form action="submitEditDorayaki.php" method="POST" class="form" >
+        <form action="submitEditDorayaki.php" method="POST" class="form" enctype="multipart/form-data">
         <?php 
           $id = 0;
           $nama = '';
@@ -82,7 +82,7 @@ if (!$_SESSION['isAdmin']){
             placeholder="Variant Name"  value="<?php echo $nama ?>">
             <label for="nama" class="name-err hide label">Please fill the name field.</label>
 
-            <textarea name="deskripsi" id="deskripsi"  placeholder="Description"> <?php echo $deskripsi ?></textarea>
+            <textarea name="deskripsi" id="deskripsi"  placeholder="Description"><?php echo $deskripsi ?></textarea>
             <label for="deskripsi" class="desc-err hide label">Please fill the description field.</label>
             
             <input type="number" name="harga" id="harga" min="0"
@@ -90,15 +90,12 @@ if (!$_SESSION['isAdmin']){
             <label for="harga" class="price-err hide label">Please fill the price field.</label>
             
             <input type="hidden" name="id" value="<?php echo $id ?>"></input>
-            <!-- <input type="number" name="stock" id="stock" min="0"
-            placeholder="Initial Stock" onblur="valStock(this.value)"> 
-            <label for="stock" class="stock-err hide label">Please fill the stock field.</label> -->
 
-            <!-- <input type="file" id="img" name="img" accept="image/*" onblur="valImg(this.value);" class="file">
+            <input type="file" id="img" name="img" accept="image/*" onblur="valImg(this.value);" class="file">
             <div class="file-btn">
-                <label for="img" class="file" onclick="getFileName();">Input Image File</label>
+                <label for="img" class="file" onclick="getFileName();">Change Image</label>
                 <p id="file-name" class=""></p>
-            </div> -->
+            </div>
             
             
             <!-- <label for="img" class="img-err hide">Please input an image for the variant.</label> -->
@@ -113,17 +110,17 @@ if (!$_SESSION['isAdmin']){
 
 <script>
 
-    // function getFileName(){
-    //     var p = document.getElementById("file-name");
+    function getFileName(){
+        var p = document.getElementById("file-name");
         
-    //     console.log(img);
-    //     setInterval(function(){
-    //         var img = document.getElementsByName("img")[0].value;
-    //         var idx = img.indexOf("fakepath") + 9;
-    //         p.textContent = img.slice(idx);
-    //     }, 500);
+        console.log(img);
+        setInterval(function(){
+            var img = document.getElementsByName("img")[0].value;
+            var idx = img.indexOf("fakepath") + 9;
+            p.textContent = img.slice(idx);
+        }, 500);
         
-    // }
+    }
 
     function valSubmit(){
         var name = document.getElementsByName("nama")[0].value;
@@ -193,14 +190,14 @@ if (!$_SESSION['isAdmin']){
     //     }
     // }
 
-    // function valImg(img){
-    //     var msg = document.querySelector(".img-err");
-    //     if (img == ""){
-    //         msg.classList.remove("hide");
-    //     } else{
-    //         msg.classList.add("hide");
-    //     }
-    // }
+    function valImg(img){
+        var msg = document.querySelector(".img-err");
+        if (img == ""){
+            msg.classList.remove("hide");
+        } else{
+            msg.classList.add("hide");
+        }
+    }
 
     <?php 
     if (isset($_GET["err"])){
