@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
         echo "mangga"; // delete variant
       } else {
         $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok + ? WHERE id = ?");
-        $queryUpdateRiwayat = $db->prepare("INSERT INTO riwayat(id_varian, varian, username, harga, perubahan) VALUES(?, ?, ?, ?, ?)");
+        $queryUpdateRiwayat = $db->prepare("INSERT INTO riwayat(id_varian, varian, username, perubahan) VALUES(?, ?, ?, ?)");
       
         $queryUpdateData->bindParam(1,$jumlah);
         $queryUpdateData->bindParam(2,$id);
@@ -82,8 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
         $queryUpdateRiwayat->bindParam(1, $id);
         $queryUpdateRiwayat->bindParam(2, $namavarian);
         $queryUpdateRiwayat->bindParam(3, $uname);
-        $queryUpdateRiwayat->bindParam(4, $harga);
-        $queryUpdateRiwayat->bindParam(5, $jumlah);  
+        // $queryUpdateRiwayat->bindParam(4, $harga);
+        $queryUpdateRiwayat->bindParam(4, $jumlah);  
         
         $updateRiwayat = $queryUpdateRiwayat->execute();
         $updateResult = $queryUpdateData->execute();

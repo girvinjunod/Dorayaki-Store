@@ -51,45 +51,33 @@ include "component/header.php";
         if(isset($_GET['id'])){
           $id = $_GET['id'] ;
         }
+        $dataExist = false;
         $db = new SQLite3('db/doraemon.db');
         $querySearchData = $db->prepare("select * from dorayaki where id = ?");
         $querySearchData->bindParam(1,$id);
         $searchResult = $querySearchData->execute();
-        if (!$searchResult){
-          header('Location: '. "index.php");
-        }
+
         while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
+          $dataExist = true;
           $data = '<h1>'.$cek["nama"].'</h1>
                   <h2 class="price">Rp. <span id="hargaDorayaki">'.$cek["harga"].'</span></h2>
                   <h3 >Stok : <span id="dataStok">'.$cek["stok"].'</span></h3>
                   <h4 class="deskripsi">'.$cek["deskripsi"].'</h4> ';
-                  
-          $image = '<img src='.$cek["gambar"].' alt="">';
-          $stok = $cek["stok"];
-          $harga = $cek["harga"];
-        }
+                  $image = '<img src='.$cek["gambar"].' alt="">';
+                  $stok = $cek["stok"];
+                  $harga = $cek["harga"];
+                }
+        if (!$dataExist){
+          header('Location: '. "index.php");
+        }        
         
       ?>
-      <div id="popupModal" class="modal">
-      <form class="modal-content" action="checkPembelian.php"  method="POST" onsubmit="showPopup()">
-      <h1>Are you sure u want delete this variant?</h1>      
-      <input type="hidden"  value="<?php echo $_GET['id'] ?>"></input>
-            <input type="hidden" name="delete" value="<?php echo $_GET['id'] ?>"></input>
-            <button id="deleteButton" class="primary-button confirmation">Delete Variant</button>
-            <button type="button" class="primary-button buy" onclick="document.getElementById('popupModal').style.display='none'">Cancel</button>
-          </form>
-      </div>
+
   <div class="detail-container">
     <div class="picture">
       <?php echo $image ?>
     </div>
     <div class="content">
-    <?php if ($isAdmin){ ?>
-      <div class="delete-button" >
-            <button id="deleteButton" class="primary-button delete" onclick="document.getElementById('popupModal').style.display='block'">Delete Variant</button>
-            <a href="editDorayaki.php?id=<?php echo $_GET['id'] ?>"><button id="editButton" class="primary-button edit">Edit</button></a>
-      </div>
-      <?php } ?>
       <?php echo $data ?>
       <!-- <div class="pembelian"> -->            
         <!-- <button onclick="console.log(document.getElementById('number').innerHTML)">Mangga</button> -->
@@ -111,18 +99,22 @@ include "component/header.php";
             var number = document.getElementById('number').value;
             const harga = <?php echo $harga ?>;
             number = parseInt(number) - 1;
-            if (number >= 0){
+            if (number >= 0 && !<?php echo ($isAdmin) ?>){
               document.getElementById('number').value = parseInt(number);
               document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
               if (number == 0){
                 document.getElementById('decreaseButton').classList.add('disabled');
                 document.getElementById('buyButton').classList.add('disabled');
               } else {
-                document.getElementById('increaseButton').classList.remove('disabled');
-                
+                document.getElementById('increaseButton').classList.remove('disabled');   
+              }              
+            } else {
+              document.getElementById('number').value = parseInt(number);
+              if (number == -1*<?php echo $stok ?>){
+                document.getElementById('decreaseButton').classList.add('disabled');
               }
+              document.getElementById('totalHarga').value = 'Rp. ' + 0;
             }
-
           }
           function increaseItem(){
             var number = document.getElementById('number').value;
@@ -131,6 +123,9 @@ include "component/header.php";
             if (number <= <?php echo $stok ?> || <?php echo ($isAdmin) ?>){
               document.getElementById('number').value = parseInt(number);
               document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
+              if (<?php echo ($isAdmin) ?>){
+                document.getElementById('totalHarga').value = 'Rp. ' + 0;
+              }
                 if (number == <?php echo $stok ?> && <?php echo ($isAdmin) ?> == 0){
                     document.getElementById('increaseButton').classList.add('disabled');
                 } else {
@@ -157,10 +152,6 @@ include "component/header.php";
             setInterval(() => {
               getStockData();
             }, 5000);
-          }
-
-          function showPopup(){
-
           }
 
           getStockDataBerkala();

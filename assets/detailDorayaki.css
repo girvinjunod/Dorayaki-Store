@@ -96,7 +96,7 @@ h2.price{
 .primary-button.delete{
   position: absolute;
   background-color: red;
-  right: 0px;
+  right: 20px;
 }
 .primary-button.delete:hover{
   background-color: red;
@@ -139,5 +139,9 @@ h2.price{
 }
 
 .primary-button.edit{
-  margin-right: 100px;
+  margin-right: 10rem;
+}
+.container-relative{
+  position: absolute;
+  width: 90%;
 }
