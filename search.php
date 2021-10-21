@@ -51,7 +51,10 @@ if (!isset($_SESSION["username"])){
               input += '</div>';
             }
           if (input == ''){
-            input = "<h1 class='not-found'>Product not Found</h1>"
+            input = "<div class='no-result'>"
+            input += "<img src='assets/img/doraemon-err.png' alt='doraemon nangis'>"
+            input += "<h1 class='not-found'>Product not Found</h1>"
+            input += "</div>"
           }
           document.getElementById('itemData').innerHTML = input;
           document.getElementById('paginationData').innerHTML = data.pagination;
