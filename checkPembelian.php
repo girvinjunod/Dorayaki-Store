@@ -1,10 +1,5 @@
 <?php
   $db = new SQLite3('db/doraemon.db');
-  function console_log( $data ){
-    echo '<script>';
-    echo 'console.log('. json_encode( $data ) .')';
-    echo '</script>';
-  }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
   $id = $_REQUEST["id"];
   $querySearchData = $db->prepare("select * from dorayaki where id = ?");
@@ -41,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
       $data = $row["stok"];
     }
   if (!$isAdmin){
-    if ($jumlah > $data){
+    if ($jumlah > $data || $jumlah == 0){
       header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
     } else {
       $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok - ? WHERE id = ?");
@@ -74,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
       }
     }
   } else {
-        if ($jumlah*-1 > $data){
+        if ($jumlah*-1 > $data || $jumlah == 0){
           header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
         } else {
           $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok + ? WHERE id = ?");
