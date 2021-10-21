@@ -15,8 +15,14 @@
             $account = $result->fetchArray();
             if ($account != false && password_verify($password, $account['password'])) {
                 $_SESSION['loginstate'] = true;
-                $_SESSION['username'] = $account["username"];
-                $_SESSION['isAdmin'] = $account["is_admin"];
+                $hash = password_hash($uname, PASSWORD_DEFAULT);
+                setcookie("username", $hash, time() + (1440), "/");
+                $insertlogin = $db->prepare('INSERT into login(username, token, time) VALUES(?, ?, ?)');
+                $insertlogin->bindParam(1, $uname);
+                $insertlogin->bindParam(2, $hash);
+                $insertlogin->bindParam(3, $waktulogin);
+                $waktulogin = time();
+                $reslogin = $insertlogin->execute();
                 header('Location:index.php?login-success');
             } else {
                 # invalid username / pass
