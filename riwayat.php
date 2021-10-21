@@ -1,5 +1,25 @@
 <?php
-session_start();
+if(!isset($_COOKIE['username'])) {
+  header('Location: '. "login.php");
+}
+else{
+  $db = new SQLite3('db/doraemon.db');
+  $prep = $db->prepare('SELECT * from login where token=:token ORDER BY id_login desc LIMIT 1');
+  $token = $_COOKIE['username'];
+  $prep->bindParam(':token', $token);
+  $rescookie = $prep->execute();
+  $valid = 0;
+  while($rowcookie = $rescookie->fetchArray(SQLITE3_ASSOC)) {
+      $valid = 1;
+      if (time() - $rowcookie['time'] > 300){
+          $valid = 0;
+      }
+  }
+  if (!$valid){
+      setcookie("username", "", time() - 3600);
+      header('Location: '. "login.php");
+  }
+}
 ?>
 <html lang="en">
 <head>
@@ -22,7 +42,7 @@ include "component/header.php";
 <div class="riwayat-container">
     <div class="riwayat-list">
         <?php
-            if ($_SESSION['isAdmin']){
+            if ($isAdmin){
         ?>
             <h2 class="judul">Stock History</h2>
         <?php
@@ -34,7 +54,7 @@ include "component/header.php";
         ?>
         <table class="tabel-riwayat">
         <?php
-            if ($_SESSION['isAdmin']){
+            if ($isAdmin){
         ?>
         <?php
             $db = new SQLite3('db/doraemon.db');
@@ -80,7 +100,6 @@ include "component/header.php";
             where riwayat.username = user.username and is_admin = 0 and user.username = ? 
             ORDER BY waktu desc');
             $prep->bindParam(1, $uname);
-            $uname = $_SESSION['username'];
             $res = $prep->execute();
             $ada = 0;
             while($row = $res->fetchArray(SQLITE3_ASSOC)) {

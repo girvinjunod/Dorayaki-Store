@@ -1,5 +1,4 @@
 <?php
-  session_start();
   if (isset($_POST)){
     $db = new SQLite3('db/doraemon.db');
     $nama = $_POST['nama'];

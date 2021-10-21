@@ -61,12 +61,16 @@ if ($email and $uname and $password and $confirmpassword){
             $admin = 0;
             $res = $prep->execute();
          }
-        $db->close();
         // login
-        session_start();
-        $_SESSION['loginstate'] = true;
-        $_SESSION['username'] = $uname;
-        $_SESSION['isAdmin'] = 0;
+        $hash = password_hash($uname, PASSWORD_DEFAULT);
+        setcookie("username", $hash, time() + (1440), "/");
+        $insertlogin = $db->prepare('INSERT into login(username, token, time) VALUES(?, ?, ?)');
+        $insertlogin->bindParam(1, $uname);
+        $insertlogin->bindParam(2, $hash);
+        $insertlogin->bindParam(3, $waktulogin);
+        $waktulogin = time();
+        $reslogin = $insertlogin->execute();
+        $db->close();
         header('Location: '. "index.php");
     } else {
         // echo $valEmail;

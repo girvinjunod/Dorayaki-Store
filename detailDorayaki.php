@@ -1,7 +1,24 @@
 <?php
-session_start();
-if (!isset($_SESSION["username"])){
-    header('Location: '. "login.php");
+if(!isset($_COOKIE['username'])) {
+  header('Location: '. "login.php");
+}
+else{
+  $db = new SQLite3('db/doraemon.db');
+  $prep = $db->prepare('SELECT * from login where token=:token ORDER BY id_login desc LIMIT 1');
+  $token = $_COOKIE['username'];
+  $prep->bindParam(':token', $token);
+  $rescookie = $prep->execute();
+  $valid = 0;
+  while($rowcookie = $rescookie->fetchArray(SQLITE3_ASSOC)) {
+      $valid = 1;
+      if (time() - $rowcookie['time'] > 300){
+          $valid = 0;
+      }
+  }
+  if (!$valid){
+      setcookie("username", "", time() - 3600);
+      header('Location: '. "login.php");
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -63,7 +80,7 @@ include "component/header.php";
       <?php echo $image ?>
     </div>
     <div class="content">
-    <?php if ($_SESSION['isAdmin']){ ?>
+    <?php if ($isAdmin){ ?>
       <div class="container-relative">
         <div class="delete-button" >
               <button id="deleteButton" class="primary-button delete" onclick="document.getElementById('popupModal').style.display='block'">Delete Variant</button>
