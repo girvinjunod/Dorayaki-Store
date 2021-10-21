@@ -1,6 +1,6 @@
 #item-list {
     background-color: #FDE8B9 ;
-    padding-bottom: 30vh;
+    padding-bottom: 5vh;
     display: flex;
     padding-top: 20vh;
 }
@@ -28,11 +28,15 @@
 .card-content {
     padding: 15px;
 }
+.card-image{
+  width: 100%;
+}
+.card-image img{
+  object-fit: cover;
+  height: 10rem;
+  width: inherit;
+  border-radius: 10px 10px 0px 0px ;
 
-.card img {
-    width: 15vw;
-    height: 20vh;
-    border-radius: 15px 15px 0px 0px;
 }
 
 .card .primary-button {
@@ -43,4 +47,24 @@
 .card .content {
   height: 4rem;
   font-size: 1.2rem;
+}
+.flat img{
+  width: 38rem;
+}
+@media only screen and (max-width: 1280px){
+  .flat img{
+    width: 33rem;
+  }
+}
+@media only screen and (max-width: 800px){
+  .card{
+    width: 30vw;
+  }
+  .flat img{
+    width: 25rem ;
+    margin-bottom: 1rem;
+  }
+  .container.index{
+    flex-direction: column-reverse;
+  }
 }
