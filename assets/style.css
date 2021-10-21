@@ -1,0 +1,182 @@
+/** TABLE OF CONTENTS
+ — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — /
+1 — Global Styles
+2 — Layout
+2.1 — Header
+2.2 — Paragraph
+3 — Page Specific CSS
+— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — /
+/// END TABLE OF CONTENTS **/
+
+/** 1 - Global Styles
+------------------------------------------------------------*/
+html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0 !important;
+}
+
+.container {
+    padding: 7%;
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/** 2 - Layout
+------------------------------------------------------------*/
+/* =========================
+2.1 - Header
+========================= */
+.navbar {
+    display: flex;
+    background-color: #460C01;
+    color: #fefefe;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 10vh;
+}
+
+.navbar a {
+    color: #fefefe;
+    text-decoration: none;
+}
+
+.form-search {
+    display: flex;
+    margin:0;
+}
+
+.navbar-input {
+    width: 30vw;
+    padding:10px;
+    border: 0;
+}
+
+.logo {
+    display: flex;
+}
+
+.logo a {
+    padding-left: 15px;
+}
+
+.navbar-submit {
+    align-items: stretch;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 0;
+    cursor: pointer;
+}
+
+.navbar-button {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #FDE8B9;
+    columns: #460C01;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.navbar-button:active {
+    background-color: #460C01;
+    columns: #FDE8B9;
+    color: white;
+}
+
+.dropdown{
+    position: relative;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropdown-content{
+    position: absolute;
+    margin: 0;
+    background: #FDE8B9;
+    border: solid 1px #460C01;
+    padding: 10px 0 10px 0;
+    width: 100%;
+    bottom: -55px;
+    display: flex;
+    justify-content: center;
+}
+
+.hide-dropdown{
+    display:none;
+}
+
+.logout-btn{
+    padding: 10px 20px 10px 20px;
+    margin: 0;
+    background: rgba(209, 4, 41, 1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.logout-btn:hover{
+    background: rgba(2, 117, 216, 1);
+}
+
+/* =========================
+2.3 - Paragraph
+========================= */
+.title, .subtitle, h4, h1 {
+    margin: 0;
+}
+
+.paragraph {
+    
+    margin-right: 10%;
+}
+.title {
+    font-size: 2rem;
+}
+
+.subtitle {
+    font-size: 2rem;
+}
+
+.content {
+    margin: 15px 0px 15px 0px;
+}
+
+
+/** 3 - Page Specific CSS
+------------------------------------------------------------*/
+.primary-button {
+    background-color: #0275D8;
+    font-weight: bold;
+    color: #fefefe;
+    padding: 10px;
+    margin-right: 10px;
+    float: right;
+    border: 0;
+    border-radius: 7px;
+}
+
+.primary-button:hover {
+    background-color: #0274d8d3;
+}
+
+.arrow-down a {
+    display: flex;
+    justify-content: center;
+    font-size: 5em;
+    text-decoration: none;
+    color: black;
+}
+
+.arrow-down a:hover {
+    font-size: 6em;
+}
+

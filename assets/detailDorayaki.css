@@ -1,0 +1,150 @@
+.detail-container{
+  width: 60vw;
+  height: 50vh;
+  display:flex;
+  flex-direction: row;
+  margin:auto;
+  margin-top: 10rem;
+  border-radius: 10px;
+  background-color: white;
+}
+.primary-button{
+  cursor: pointer;
+}
+.picture img {
+  object-fit: cover;
+  height: 100%;
+  width: 25rem;
+  border-radius: 10px 0px 0px 10px;
+}
+.content{
+  width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  position: relative;
+}
+.pembelian{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-grow: 1;
+  margin-bottom: 2rem;
+}
+
+.pembelian .primary-button{
+  width: 80%;
+  margin: 0;
+  float: none;
+}
+.pembelian .primary-button.detail{
+  width: 20rem;
+}
+
+.pembelian .primary-button.buy{
+  width: 5rem;
+  margin-left: 2rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
+.pembelian .primary-button.operation{
+  width: 2rem;
+  height: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+}
+.pembelian .primary-button.data{
+  width: 4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+body{
+  background-color: rgba(246, 226, 180, 1);
+}
+.deskripsi{
+  font-weight: normal;
+}
+.data{
+  height: 2rem;
+  width: 4rem;
+  text-align: center;
+  padding: 0;
+  color: black;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  background-color: none;
+  border: none;
+  font-size: 1.5rem;
+  pointer-events: none;
+}
+
+.totalprice{
+  width: 10rem;
+  font-size: 1.5rem;
+}
+h2.price{
+  margin: 0;
+}
+
+.disabled{
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.primary-button.delete{
+  position: absolute;
+  background-color: red;
+  right: 20px;
+}
+.primary-button.delete:hover{
+  background-color: red;
+  opacity: 0.7;
+}
+
+.primary-button.confirmation{
+  background-color: red;
+}
+.primary-button.confirmation:hover{
+  background-color: red;
+  opacity: 0.7;
+  
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 50px;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+  padding: 3em;
+  border-radius: 4rem;
+  text-align: center;
+}
+.modal-content .primary-button{
+  margin-top: 2em;
+  float: none;
+}
+
+.primary-button.edit{
+  margin-right: 10rem;
+}
+.container-relative{
+  position: absolute;
+  width: 90%;
+}

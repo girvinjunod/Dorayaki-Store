@@ -1,0 +1,46 @@
+#item-list {
+    background-color: #FDE8B9 ;
+    padding-bottom: 30vh;
+    display: flex;
+    padding-top: 20vh;
+}
+
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card {
+    background-color: #fdfdfd;
+    width: 15vw;
+    border-radius: 15px;
+    font-size: 1em;
+    padding-bottom: 20px;
+    margin: 20px;
+}
+
+.card h6 {
+    margin: 0;
+    font-weight: 500;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card img {
+    width: 15vw;
+    height: 20vh;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.card .primary-button {
+    width: 90%;
+    justify-content: center;
+}
+
+.card .content {
+  height: 4rem;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,46 @@
+body{
+  background-color: #FDE8B9 ;
+}
+.pagination{
+  display:flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  margin-bottom: 5rem;
+  margin-top: 2rem;
+  border-radius: 1rem;
+  background-color: aliceblue;
+}
+.pagination .option{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.card-container{
+  padding: 7%;
+  padding-top: 5%;
+  padding-bottom: 0;
+  align-items: center;
+  justify-content: space-between;
+}
+.search-result{
+  margin-left: 5%;
+}
+.pagination .option a{
+  text-decoration: none;
+  color: black;
+}
+.pagination .option.disabled a{
+  color: gray;
+  pointer-events: none;
+}
+
+.pagination .active{
+  background-color: blueviolet;
+}
+.not-found{
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
