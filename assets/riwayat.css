@@ -1,10 +1,12 @@
 .riwayat-container{
     background-color: rgba(246, 226, 180, 1);
-    height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    overflow: auto;
 }
 
 .judul{
@@ -19,7 +21,9 @@
     width: auto;
     background: rgba(70, 12, 1, 1);
     color: white;
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 20px;
     border-radius: 20px;
 }
 
