@@ -19,8 +19,11 @@ include "component/header.php";
                 <h4>Since 2021</h4>
             </div>
             <div class="content">
-                ApelManggaKucing hadir menjadi toko dorayaki favorit anda, tidak perlu khawatir kami menyediakan banyak varian rasa yang tentunya sangat enak dan memiliki harga yang terjangkau.
-                Berikut 10 Dorayaki Best Seller
+                <p>ApelManggaKucing is here to serve the highest quality dorayakis. We serve the most exotics of dorayaki that people used to only be able to dream of eating.
+                  We work day and night to guarantee that our dorayakis will be able to blow you away and make you keep coming back for more.
+                </p>
+                
+                <p>Below are our top 8 best seller.</p>
             </div>
             <!-- <a href="#"> <button class="primary-button"> Learn More </button> </a> -->
         </div>
