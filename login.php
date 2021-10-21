@@ -20,14 +20,15 @@ if (isset($_SESSION["username"])){
     <div class="form-register">
         <h2>LOGIN</h2>
         <form action="submitLogin.php" method="POST" class="form">
-            <input type="email" name="email" id="email"
-                placeholder="Email" required>
-            <label id="info-label">
-                Please enter a valid email.
+            <input type="text" name="uname" id="uname"
+                placeholder="Username" onblur="valUname(this.value);">
+            <label for="uname" class="uname-err err-msg hide">
+                Please enter your username.
             </label>
             <input type="password" name="password" id="password" 
-                placeholder="Password" required>
-            <label id="info-label">
+                placeholder="Password" onblur="valPassword(this.value);">
+            <label for="password" class="pass-err err-msg hide">Please fill the password field.</label>
+            <label for="password" id="info-label">
                 Don't have an account? <a href="register.php"> click here </a>
             </label>
             <?php
@@ -42,6 +43,34 @@ if (isset($_SESSION["username"])){
         </form>
     </div>
 </div>
+
+<script>
+    function valUname(uname){
+        var msg = document.querySelector(".uname-err");
+        console.log("Masuk");
+        if (uname.length == 0){
+            msg.classList.remove("hide");
+            console.log("muncul");
+        } else{
+            msg.classList.add("hide");
+            console.log("sembunyi");
+            
+        }
+    }
+    function valPassword(pass){
+        var msg = document.querySelector(".pass-err");
+        console.log("Masuk");
+        if (pass.length == 0){
+            msg.classList.remove("hide");
+            console.log("muncul");
+        } else{
+            msg.classList.add("hide");
+            console.log("sembunyi");
+            
+        }
+    }
+</script>
+
 
 <?php
     unset($_SESSION["error"]);

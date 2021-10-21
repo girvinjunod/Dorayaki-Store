@@ -72,7 +72,6 @@ include "component/header.php";
         }        
         
       ?>
-
   <div class="detail-container">
     <div class="picture">
       <?php echo $image ?>
@@ -165,23 +164,22 @@ include "component/header.php";
             } ,
             5000)
             <?php 
-            } else if ($_GET["err"]==1){ ?>
+            } else if ($_GET["err"]=="1"){ ?>
             setTimeout( function() {
                 var sign = document.querySelector(".error-msg");
                 sign.classList.add("hide2");
             } ,
             5000)
-            <?php
-            } else if ($_GET["err"]==2){ ?>
+            <?php 
+            } else if ($_GET["err"]=="2"){ ?>
               setTimeout( function() {
                   var sign = document.querySelector(".error-msg.delete-msg");
                   sign.classList.add("hide2");
               } ,
-            <?php
+            <?php 
             }
-          ?>
+            ?>
         </script>
-      <!-- </div> -->
     </div>
   </div>
 </body>

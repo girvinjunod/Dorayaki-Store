@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
-    <title>Add New Dorayaki Variant</title>
+    <title>History</title>
 </head>
 <body>
 
@@ -33,25 +33,34 @@ include "component/header.php";
         <?php
             if ($_SESSION['isAdmin']){
         ?>
-            
-            <tr>
-            <th>Variant Name</th>
-            <th>Username</th>
-            <th>Stock Change</th>
-            <th>Price</th>
-            <th>Time</th>
-        </tr>
         <?php
             $db = new SQLite3('db/doraemon.db');
             $res = $db->query('SELECT * FROM riwayat ORDER BY waktu desc');
+            $ada = 0;
             while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+                $ada = 1;
+            }
+            if ($ada){
                 echo "<tr>";
-                echo "<td>" . "<a href='" . "pembelianDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
-                echo "<td>" . $row["username"] . "</td>";
-                echo "<td>" . $row["perubahan"] . "</td>";
-                echo "<td>" . $row["harga"] . "</td>";
-                echo "<td>" . $row["waktu"] . "</td>";
+                    echo "<th>Variant Name</th>";
+                    echo "<th>Username</th>";
+                    echo "<th>Stock Change</th>";
+                    echo "<th>Price</th>";
+                    echo "<th>Time</th>";
                 echo "</tr>";
+
+                while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+                    echo "<tr>";
+                    echo "<td>" . "<a href='" . "pembelianDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
+                    echo "<td>" . $row["username"] . "</td>";
+                    echo "<td>" . $row["perubahan"] . "</td>";
+                    echo "<td>" . $row["harga"] . "</td>";
+                    echo "<td>" . $row["waktu"] . "</td>";
+                    echo "</tr>";
+                }
+            }
+            else{
+                echo "<p>You haven't purchased anything yet :(</p>";
             }
             $db->close();
         ?>
@@ -59,12 +68,6 @@ include "component/header.php";
         <?php
             } else{
         ?>
-          <tr>
-            <th>Variant Name</th>
-            <th>Amount</th>
-            <th>Price</th>
-            <th>Time</th>
-        </tr>
         <?php
             $db = new SQLite3('db/doraemon.db');
             // $res = $db->query('SELECT * FROM riwayat, user 
@@ -76,13 +79,30 @@ include "component/header.php";
             $prep->bindParam(1, $uname);
             $uname = $_SESSION['username'];
             $res = $prep->execute();
+            $ada = 0;
             while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+                $ada = 1;
+            }
+            if ($ada){
                 echo "<tr>";
-                echo "<td>" . "<a href='" . "pembelianDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
-                echo "<td>" . abs($row["perubahan"]) . "</td>";
-                echo "<td>" . $row["harga"] . "</td>";
-                echo "<td>" . $row["waktu"] . "</td>";
+                    echo "<th>Variant Name</th>";
+                    echo "<th>Amount</th>";
+                    echo "<th>Price</th>";
+                    echo "<th>Time</th>";
                 echo "</tr>";
+
+                while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+                    echo "<tr>";
+                    echo "<td>" . "<a href='" . "pembelianDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
+                    echo "<td>" . abs($row["perubahan"]) . "</td>";
+                    echo "<td>" . $row["harga"] . "</td>";
+                    echo "<td>" . $row["waktu"] . "</td>";
+                    echo "</tr>";
+                }
+
+            }
+            else{
+                echo "<p>You haven't purchased anything yet :(</p>";
             }
             $db->close();
         ?>  
