@@ -8,10 +8,21 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 3. Docker
 
 # Cara Instalasi
+### Melalui Lokal
+1. Install PHP
+2. Install Apache Server
+3. Install SQLite
+
+### Melalui Docker
+1. Install Docker
+2. Install Docker Compose
 
 # Cara Menjalankan Server
+### Melalui Lokal
+1. Jalankan `PHP -S localhost:4000` (4000 dapat diubah dengan port lainnya)
 
-`docker-compose run`
+### Melalui Docker
+1. Jalankan perintah `docker-compose up`
 
 # Screenshot Tampilan Aplikasi
 
