@@ -11,6 +11,8 @@ if (isset($_SESSION["username"])){
     <link rel="stylesheet" href="assets/global.css">
     <link rel="stylesheet" href="assets/login.css">
     <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <div class="container">
