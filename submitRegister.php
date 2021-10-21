@@ -60,22 +60,24 @@ if ($email and $uname and $password and $confirmpassword){
             $prep->bindParam(4, $admin);
             $admin = 0;
             $res = $prep->execute();
-        }
+         }
         $db->close();
-        header('Location: '. "login.php");
-        exit();
+        // login
+        session_start();
+        $_SESSION['loginstate'] = true;
+        $_SESSION['username'] = $uname;
+        $_SESSION['isAdmin'] = 0;
+        header('Location: '. "index.php");
     } else {
         // echo $valEmail;
         // echo $valUname;
         // echo $valPassword;
         // echo $valConfirm;
         header('Location: '. "register.php?err=1");
-        exit();
     }
     
 } else{
     header('Location: '. "register.php?err=1");
-    exit();
 }
 
 ?>

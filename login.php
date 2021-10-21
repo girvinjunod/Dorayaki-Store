@@ -1,36 +1,9 @@
 <?php
 session_start();
 
-if (isset($_COOKIE["session_id"])) {
-    $session_id = $_COOKIE["session_id"];
-    $db = new SQLite3('db/doraemon.db');
-
-    if($db) { 
-        $statement = $db->prepare('SELECT username, is_admin FROM login WHERE session_id = :session_id');
-        $statement->bindValue(':session_id', $session_id);
-        $result = $statement->execute();
-        $account = $result->fetchArray();
-        if ($account != false) {
-            # Session
-            $_SESSION['loginstate'] = true;
-            $_SESSION['username'] = $account["username"];
-            $_SESSION['isAdmin'] = $account["is_admin"];
-            header('Location:index.php?login-success');
-            exit();
-        } else {
-            # invalid username / pass
-            $_SESSION["error"] = "Incorrect Username or Password";
-            header('Location:login.php?error=invalid-credentials');
-            exit();
-        }
-    }
-    $db->close();
-}
-
-if (isset($_SESSION["username"])) {
+if (isset($_SESSION["username"])){
     header('Location: '. "index.php");
-    exit();
-}
+  }
 
 ?>
 
