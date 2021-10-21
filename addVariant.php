@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+  }
+if (!$_SESSION['isAdmin']){
+    header('Location: '. "index.php");
+}
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,17 +25,6 @@
 <?php
 include "component/header.php";
 ?>
-
-<?php
-if (!isset($_SESSION["username"])){
-    header('Location: '. "login.php");
-  }
-if (!$_SESSION['isAdmin']){
-    header('Location: '. "index.php");
-}
-
-?>
-
 <?php 
     if (isset($_GET["err"])){
         if($_GET["err"]=="0"){

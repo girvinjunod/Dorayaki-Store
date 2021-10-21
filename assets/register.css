@@ -103,3 +103,9 @@ body{
     font-size: 0.9rem;
     padding-left: 2px;
 }
+
+.form .redirect{
+    color: #f4f4f4;
+    font-weight: bold;
+    margin-top: 5px;
+}

@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+}
+if (!$_SESSION['isAdmin']){
+    $isAdmin = 0;
+}else{
+    $isAdmin = 1;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,17 +22,6 @@
   <link rel="stylesheet" href="assets/addVariant.css">
 </head>
 <body>
-<?php
-session_start();
-if (!isset($_SESSION["username"])){
-    header('Location: '. "login.php");
-}
-if (!$_SESSION['isAdmin']){
-    $isAdmin = 0;
-}else{
-    $isAdmin = 1;
-}
-?>
 <?php
 include "component/header.php";
 ?>  
@@ -68,94 +68,106 @@ include "component/header.php";
                   $harga = $cek["harga"];
                 }
         if (!$dataExist){
-          header('Location: '. "index.php");
+          ?>
+          <form id="err-404" action="404.php">
+            <input type="hidden" name="redirect">
+          </form>
+          <script>
+          document.getElementById("err-404").submit();
+          </script>
+          <?php
         }        
-        
       ?>
-  <div class="detail-container">
-    <div class="picture">
-      <?php echo $image ?>
-    </div>
-    <div class="content">
-      <?php echo $data ?>
-      <!-- <div class="pembelian"> -->            
-        <!-- <button onclick="console.log(document.getElementById('number').innerHTML)">Mangga</button> -->
-        <form class="pembelian" action="checkPembelian.php" method="POST">
-          <div id="decreaseButton" class="primary-button operation" onclick="decreaseItem()">-</div>
-          <input name="jumlahBarang" id="number" type="text" class="data" value="1"></input>
-          <input name="idVarian" type="hidden" value="<?php echo $_GET['id'] ?>"></input>
-          <div id="increaseButton" class="primary-button operation" onclick="increaseItem()">+</div>
-          <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input>
-          <?php if ($isAdmin){ ?>
-          <button name="buy" id="buyButton" class="primary-button buy">Add </button>
-            <?php } else { ?>
-          <button id="buyButton" class="primary-button buy">Buy</button>
-        </form>
-            <?php } ?>
-        
-        <script>
-          function decreaseItem(){
-            var number = document.getElementById('number').value;
-            const harga = <?php echo $harga ?>;
-            number = parseInt(number) - 1;
-            if (number >= 0 && !<?php echo ($isAdmin) ?>){
-              document.getElementById('number').value = parseInt(number);
-              document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
-              if (number == 0){
-                document.getElementById('decreaseButton').classList.add('disabled');
-                document.getElementById('buyButton').classList.add('disabled');
-              } else {
-                document.getElementById('increaseButton').classList.remove('disabled');   
-              }              
+
+<div class="detail-container">
+  <div class="picture">
+    <?php echo $image ?>
+  </div>
+  <div class="content">
+    <?php echo $data ?>
+    <!-- <div class="pembelian"> -->            
+      <!-- <button onclick="console.log(document.getElementById('number').innerHTML)">Mangga</button> -->
+      <form class="pembelian" action="checkPembelian.php" method="POST">
+        <div id="decreaseButton" class="primary-button operation" onclick="decreaseItem()">-</div>
+        <input name="jumlahBarang" id="number" type="text" class="data" value="1"></input>
+        <input name="idVarian" type="hidden" value="<?php echo $_GET['id'] ?>"></input>
+        <div id="increaseButton" class="primary-button operation" onclick="increaseItem()">+</div>
+        <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input>
+        <?php if ($isAdmin){ ?>
+        <button name="buy" id="buyButton" class="primary-button buy">Add </button>
+          <?php } else { ?>
+        <button id="buyButton" class="primary-button buy">Buy</button>
+          <?php } ?>
+      </form>
+      
+      <script>
+        function decreaseItem(){
+          console.log("kurang");
+          var number = document.getElementById('number').value;
+          const harga = <?php echo $harga ?>;
+          number = parseInt(number) - 1;
+          if (number >= 0 && !<?php echo ($isAdmin) ?>){
+            document.getElementById('number').value = parseInt(number);
+            document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
+            if (number == 0){
+              document.getElementById('decreaseButton').classList.add('disabled');
+              document.getElementById('buyButton').classList.add('disabled');
             } else {
-              document.getElementById('number').value = parseInt(number);
-              if (number == -1*<?php echo $stok ?>){
-                document.getElementById('decreaseButton').classList.add('disabled');
-              }
+              document.getElementById('increaseButton').classList.remove('disabled');   
+            }              
+          } else {
+            document.getElementById('number').value = parseInt(number);
+            if (number == -1*<?php echo $stok ?>){
+              document.getElementById('decreaseButton').classList.add('disabled');
+            }
+            document.getElementById('totalHarga').value = 'Rp. ' + 0;
+          }
+        }
+        function increaseItem(){
+          console.log("tambah");
+          var number = document.getElementById('number').value;
+          const harga = <?php echo $harga ?>;
+          number = parseInt(number) + 1;
+          if (number <= <?php echo $stok ?> || <?php echo ($isAdmin) ?>){
+            document.getElementById('number').value = parseInt(number);
+            document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
+            if (<?php echo ($isAdmin) ?>){
               document.getElementById('totalHarga').value = 'Rp. ' + 0;
             }
-          }
-          function increaseItem(){
-            var number = document.getElementById('number').value;
-            const harga = <?php echo $harga ?>;
-            number = parseInt(number) + 1;
-            if (number <= <?php echo $stok ?> || <?php echo ($isAdmin) ?>){
-              document.getElementById('number').value = parseInt(number);
-              document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
-              if (<?php echo ($isAdmin) ?>){
-                document.getElementById('totalHarga').value = 'Rp. ' + 0;
+              if (number == <?php echo $stok ?> && <?php echo ($isAdmin) ?> == 0){
+                  document.getElementById('increaseButton').classList.add('disabled');
+              } else {
+                  document.getElementById('decreaseButton').classList.remove('disabled');
+                  document.getElementById('buyButton').classList.remove('disabled');
               }
-                if (number == <?php echo $stok ?> && <?php echo ($isAdmin) ?> == 0){
-                    document.getElementById('increaseButton').classList.add('disabled');
-                } else {
-                    document.getElementById('decreaseButton').classList.remove('disabled');
-                    document.getElementById('buyButton').classList.remove('disabled');
-                }
-            }
           }
-          function getStockData(){
-            const req = new XMLHttpRequest();
-            req.open("GET","checkPembelian.php?id=" + <?php echo $_GET["id"] ?>);
-            req.send();
-            req.onload = function(){
-              if (this){
-                if (parseInt(this.responseText) != parseInt(document.getElementById('dataStok').innerHTML)){
-                  document.getElementById('dataStok').innerHTML = parseInt(this.responseText)
-                }
+        }
+        function getStockData(){
+          const req = new XMLHttpRequest();
+          req.open("GET","checkPembelian.php?id=" + <?php echo $_GET["id"]?>);
+          req.send();
+          req.onload = function(){
+            if (this){
+              console.log("kucing");
+              console.log(this.responseText);
+              if (parseInt(this.responseText) != parseInt(document.getElementById('dataStok').innerHTML)){
+                document.getElementById('dataStok').innerHTML = parseInt(this.responseText)
               }
             }
-
-          }
-          function getStockDataBerkala(){
-            // var myid = setInterval(getStockData(),5000)
-            setInterval(() => {
-              getStockData();
-            }, 5000);
           }
 
-          getStockDataBerkala();
+        }
+        function getStockDataBerkala(){
+          // var myid = setInterval(getStockData(),5000)
+          setInterval(() => {
+            getStockData();
+          }, 5000);
+        }
 
-          <?php 
+        getStockDataBerkala();
+
+        <?php 
+        if (isset($_GET["err"])){
             if($_GET["err"]=="0"){
             ?>
             setTimeout( function() {
@@ -175,12 +187,13 @@ include "component/header.php";
               setTimeout( function() {
                   var sign = document.querySelector(".error-msg.delete-msg");
                   sign.classList.add("hide2");
-              } ,
+              } , 5000)
             <?php 
             }
-            ?>
-        </script>
-    </div>
+          }
+          ?>
+      </script>
   </div>
+</div>
 </body>
 </html>

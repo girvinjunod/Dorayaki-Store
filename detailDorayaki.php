@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +16,6 @@
   <link rel="stylesheet" href="assets/itemlist.css">
 </head>
 <body>
-<?php
-session_start();
-if (!isset($_SESSION["username"])){
-    header('Location: '. "login.php");
-}
-
-?>
 <?php
 include "component/header.php";
 ?>  
@@ -40,13 +39,19 @@ include "component/header.php";
           $dataExist = true;
         }
         if (!$dataExist){
-          header('Location: '. "404.php");
-        }  
-        
+          ?>
+          <form id="err-404" action="404.php">
+            <input type="hidden" name="redirect">
+          </form>
+          <script>
+          document.getElementById("err-404").submit();
+          </script>
+          <?php
+        }        
       ?>
   <div id="popupModal" class="modal">
-  <form class="modal-content" action="checkPembelian.php"  method="POST" onsubmit="showPopup()">
-  <h1>Are you sure u want delete this variant?</h1>      
+  <form class="modal-content" action="deleteVarian.php"  method="POST" onsubmit="showPopup()">
+  <h1>Are you sure you want delete this variant?</h1>  
   <input type="hidden"  value="<?php echo $_GET['id'] ?>"></input>
         <input type="hidden" name="delete" value="<?php echo $_GET['id'] ?>"></input>
         <button id="deleteButton" class="primary-button confirmation">Delete Variant</button>

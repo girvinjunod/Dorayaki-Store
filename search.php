@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +17,6 @@
   <title>Search Result</title>
 </head>
 <body>
-<?php
-session_start();
-if (!isset($_SESSION["username"])){
-    header('Location: '. "login.php");
-}
-?>
 <script>
       function load_data(page_number){
         var form_data = new FormData();

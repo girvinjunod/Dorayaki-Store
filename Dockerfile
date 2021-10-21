@@ -1,5 +1,6 @@
-FROM php:8.0-cli
-COPY . /var/www/html
+FROM php:8.0-apache
+COPY ./ /var/www/html
 WORKDIR /var/www/html
-EXPOSE 8000
-CMD ["php", "-S", "0.0.0.0:8000"]
+RUN chown www-data:www-data ./db
+RUN chown www-data:www-data ./db/doraemon.db
+RUN chmod 777 ./db/img

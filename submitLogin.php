@@ -6,7 +6,7 @@
     if (isset($_POST['submit'])) {
         $db = new SQLite3('db/doraemon.db');
         if(!$db) {
-            echo "Error opening database";
+            // echo "Error opening database";
         } else { 
             # $res = $db->prepare('SELECT * FROM user where (?, ?)');
             $statement = $db->prepare('SELECT username, password, is_admin FROM user WHERE username = :username');

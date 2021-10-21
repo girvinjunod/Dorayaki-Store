@@ -29,7 +29,7 @@ if (isset($_SESSION["username"])){
                 placeholder="Password" onblur="valPassword(this.value);">
             <label for="password" class="pass-err err-msg hide">Please fill the password field.</label>
             <label for="password" id="info-label">
-                Don't have an account? <a href="register.php"> click here </a>
+                Don't have an account? <a href="register.php"> Register here. </a>
             </label>
             <?php
                 if(isset($_SESSION["error"])){

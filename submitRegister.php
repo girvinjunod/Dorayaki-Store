@@ -46,11 +46,11 @@ if ($email and $uname and $password and $confirmpassword){
     }
 
     if ($valEmail and $valUname and $valPassword and $valConfirm){
-        echo "data valid";
+        // echo "data valid";
         // masukin ke database
         $db = new SQLite3('db/doraemon.db');
          if(!$db) {
-            echo "Error opening database";
+            // echo "Error opening database";
          } else {
             $prep = $db->prepare("INSERT INTO user(email, username, password, is_admin) VALUES (?, ?, ?, ?)");
             $prep->bindParam(1, $email);
@@ -60,11 +60,6 @@ if ($email and $uname and $password and $confirmpassword){
             $prep->bindParam(4, $admin);
             $admin = 0;
             $res = $prep->execute();
-            if(!$res) {
-                echo $db->lastErrorMsg();
-              } else {
-                    echo "Data Inserted";
-            }
          }
         $db->close();
         // login

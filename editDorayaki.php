@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+  }
+if (!$_SESSION['isAdmin']){
+    header('Location: '. "index.php");
+}
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,17 +24,6 @@
 <!-- ini navbar -->
 <?php
 include "component/header.php";
-?>
-
-<?php
-session_start();
-if (!isset($_SESSION["username"])){
-    header('Location: '. "login.php");
-  }
-if (!$_SESSION['isAdmin']){
-    header('Location: '. "index.php");
-}
-
 ?>
 
 <?php 
@@ -50,8 +49,6 @@ if (!$_SESSION['isAdmin']){
 
 <div class="form-register">
         <h2>Edit Variant</h2>
-
-        <form action="submitEditDorayaki.php" method="POST" class="form" enctype="multipart/form-data">
         <?php 
           $id = 0;
           $nama = '';
@@ -71,13 +68,30 @@ if (!$_SESSION['isAdmin']){
               $dataExist = true;
             }
             if (!$dataExist){
-              header('Location: '. "index.php");
-            }  
-          }else {
-            // header('Location: '. "index.php");
-          }
-        
-        ?>
+            ?>
+                <form id="err-404" action="404.php">
+                <input type="hidden" name="redirect">
+                </form>
+                <script>
+                console.log("kucinggarong");
+                document.getElementById("err-404").submit();
+                </script>
+                <?php
+              }        
+            }
+            else{
+                ?>
+                <form id="err-404" action="404.php">
+                <input type="hidden" name="redirect">
+                </form>
+                <script>
+                console.log("kucinggarong");
+                document.getElementById("err-404").submit();
+                </script>
+                <?php
+              }      
+            ?>
+            <form action="submitEditDorayaki.php" method="POST" class="form" enctype="multipart/form-data">
             <input type="text" name="nama" id="nama"
             placeholder="Variant Name"  value="<?php echo $nama ?>">
             <label for="nama" class="name-err hide label">Please fill the name field.</label>

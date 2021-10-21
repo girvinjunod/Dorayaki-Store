@@ -57,6 +57,7 @@ if (isset($_SESSION["username"])){
             <input type="password" name="confirmpassword" id="confirmpassword" 
             placeholder="Confirm Password" onkeyup="valConfirmPassword(this.value)"> 
             <label for="confirmpassword" class="confirmpass-err hide">Those passwords didn't match, try again.</label>
+            <label for="confirmpassword" id="info-label" class="redirect">Already have an account? <a href="login.php"> Login here. </a></label>
             
             <p id="submit-err" class="hide">Please fill all the required fields properly before registering.</p>
             <button class="reg-button">Register</button>
