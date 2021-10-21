@@ -12,44 +12,89 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
   }
   echo $data;
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-  $id = $_POST["idVarian"];
-  $jumlah = $_POST["jumlahBarang"];
-  $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok - ? WHERE id = ?");
-  $queryUpdateTotalPenjualan = $db->prepare("UPDATE dorayaki SET total_penjualan = total_penjualan + ? WHERE id = ?");
-  $queryUpdateRiwayat = $db->prepare("INSERT INTO riwayat(id_varian, varian, username, harga, perubahan) VALUES(?, ?, ?, ?, ?)");
-
-  $queryUpdateRiwayat->bindParam(1, $id);
-  $queryUpdateRiwayat->bindParam(2, $namavarian);
-  $queryUpdateRiwayat->bindParam(3, $uname);
-  $queryUpdateRiwayat->bindParam(4, $harga);
-  $queryUpdateRiwayat->bindParam(5, $perubahan);
-
-  $ambildata = $db->prepare("select * from dorayaki where id = ?");
-  $ambildata->bindParam(1, $id);
-  $datavarian = $ambildata->execute();
-  while($row = $datavarian->fetchArray(SQLITE3_ASSOC)) {
-    $namavarian = $row["nama"];
-    $harga = $row["harga"] * $jumlah;
+  if(!$_POST["delete"]){
+    $id = $_POST["idVarian"];
+    $jumlah = $_POST["jumlahBarang"];
+    $uname = $_SESSION["username"];
+    $ambildata = $db->prepare("select * from dorayaki where id = ?");
+    $ambildata->bindParam(1, $id);
+    $datavarian = $ambildata->execute();
+    while($row = $datavarian->fetchArray(SQLITE3_ASSOC)) {
+      $namavarian = $row["nama"];
+      $harga = $row["harga"] * $jumlah;
+    }
+  } else{
+    $id = $_POST["delete"];
   }
-  
-  $uname = $_SESSION["username"];
-  $perubahan = -1 * $jumlah;
 
-  $queryUpdateData->bindParam(1,$jumlah);
-  $queryUpdateTotalPenjualan->bindParam(1,$jumlah);
-  $queryUpdateData->bindParam(2,$id);
-  $queryUpdateTotalPenjualan->bindParam(2,$id);
-  echo "$namavarian";
-  echo "$harga";
-  echo "$perubahan";
-  $updateRiwayat = $queryUpdateRiwayat->execute();
-  $updateResult = $queryUpdateData->execute();
-  $updateTotalPenjualanResult = $queryUpdateTotalPenjualan->execute();
-  if ($updateResult && $updateTotalPenjualanResult && $updateRiwayat){
-    echo "success";
-    header('Location: '. "pembelianDorayaki.php?id=".$id."&err=0");
+  if (!$_SESSION['isAdmin']){
+    $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok - ? WHERE id = ?");
+    $queryUpdateTotalPenjualan = $db->prepare("UPDATE dorayaki SET total_penjualan = total_penjualan + ? WHERE id = ?");
+    $queryUpdateRiwayat = $db->prepare("INSERT INTO riwayat(id_varian, varian, username, harga, perubahan) VALUES(?, ?, ?, ?, ?)");
+  
+    $queryUpdateRiwayat->bindParam(1, $id);
+    $queryUpdateRiwayat->bindParam(2, $namavarian);
+    $queryUpdateRiwayat->bindParam(3, $uname);
+    $queryUpdateRiwayat->bindParam(4, $harga);
+    $queryUpdateRiwayat->bindParam(5, $perubahan);
+  
+
+    $perubahan = -1 * $jumlah;
+  
+    $queryUpdateData->bindParam(1,$jumlah);
+    $queryUpdateTotalPenjualan->bindParam(1,$jumlah);
+    $queryUpdateData->bindParam(2,$id);
+    $queryUpdateTotalPenjualan->bindParam(2,$id);
+    // echo "$namavarian";
+    // echo "$harga";
+    // echo "$perubahan";
+    $updateRiwayat = $queryUpdateRiwayat->execute();
+    $updateResult = $queryUpdateData->execute();
+    $updateTotalPenjualanResult = $queryUpdateTotalPenjualan->execute();
+    if ($updateResult && $updateTotalPenjualanResult && $updateRiwayat){
+      echo "success";
+      header('Location: '. "pembelianDorayaki.php?id=".$id."&err=0");
+    } else {
+      header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
+    }
   } else {
-    header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
+      if($_POST["delete"]){
+        $queryDeleteVariant = $db->prepare("DELETE FROM dorayaki WHERE id = ?");
+        $queryDeleteRiwayatVariant = $db->prepare("DELETE FROM riwayat WHERE id_varian = ?");
+        $queryDeleteVariant->bindParam(1,$id);
+        $queryDeleteRiwayatVariant->bindParam(1,$id);
+        $deleteResult = $queryDeleteVariant->execute();
+        $deleteRiwayatResult = $queryDeleteRiwayatVariant->execute();
+        if ($deleteResult && $deleteRiwayatResult){
+          header('Location: '. "index.php");
+        }
+        else{
+          header('Location: '. "pembelianDorayaki.php?id=".$id."&err=2");
+        }
+        echo "mangga"; // delete variant
+      } else {
+        $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok + ? WHERE id = ?");
+        $queryUpdateRiwayat = $db->prepare("INSERT INTO riwayat(id_varian, varian, username, perubahan) VALUES(?, ?, ?, ?)");
+      
+        $queryUpdateData->bindParam(1,$jumlah);
+        $queryUpdateData->bindParam(2,$id);
+    
+        $queryUpdateRiwayat->bindParam(1, $id);
+        $queryUpdateRiwayat->bindParam(2, $namavarian);
+        $queryUpdateRiwayat->bindParam(3, $uname);
+        // $queryUpdateRiwayat->bindParam(4, $harga);
+        $queryUpdateRiwayat->bindParam(4, $jumlah);  
+        
+        $updateRiwayat = $queryUpdateRiwayat->execute();
+        $updateResult = $queryUpdateData->execute();
+    
+        if ($updateResult && $updateRiwayat){
+          echo "success";
+          header('Location: '. "pembelianDorayaki.php?id=".$id."&err=0");
+        } else {
+          header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
+        }
+      }
   }
 
 }

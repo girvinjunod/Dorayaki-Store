@@ -8,6 +8,9 @@
   border-radius: 10px;
   background-color: white;
 }
+.primary-button{
+  cursor: pointer;
+}
 .picture img {
   object-fit: cover;
   height: 100%;
@@ -21,6 +24,7 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
+  position: relative;
 }
 .pembelian{
   text-align: center;
@@ -30,6 +34,7 @@
   flex-grow: 1;
   margin-bottom: 2rem;
 }
+
 .pembelian .primary-button{
   width: 80%;
   margin: 0;
@@ -89,4 +94,57 @@ h2.price{
 .disabled{
   pointer-events: none;
   opacity: 0.6;
+}
+
+.primary-button.delete{
+  position: absolute;
+  background-color: red;
+  right: 20px;
+}
+.primary-button.delete:hover{
+  background-color: red;
+  opacity: 0.7;
+}
+
+.primary-button.confirmation{
+  background-color: red;
+}
+.primary-button.confirmation:hover{
+  background-color: red;
+  opacity: 0.7;
+  
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 50px;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+  padding: 3em;
+  border-radius: 4rem;
+  text-align: center;
+}
+.modal-content .primary-button{
+  margin-top: 2em;
+  float: none;
+}
+
+.primary-button.edit{
+  margin-right: 10rem;
+}
+.container-relative{
+  position: absolute;
+  width: 90%;
 }

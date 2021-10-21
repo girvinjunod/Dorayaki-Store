@@ -4,13 +4,24 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Dorayaki</title>
+  <title>Pembelian Dorayaki</title>
   <link rel="stylesheet" href="assets/detailDorayaki.css">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/itemlist.css">
   <link rel="stylesheet" href="assets/addVariant.css">
 </head>
 <body>
+<?php
+session_start();
+if (!isset($_SESSION["username"])){
+    header('Location: '. "login.php");
+}
+if (!$_SESSION['isAdmin']){
+    $isAdmin = 0;
+}else{
+    $isAdmin = 1;
+}
+?>
 <?php
 include "component/header.php";
 ?>  
@@ -29,41 +40,45 @@ include "component/header.php";
         </div>
 
         <?php
-      }
+        } else if ($_GET["err"]==2){ ?>
+        <div class="error-msg delete-msg">
+            <p>Delete Variant Failed, please try again</p>
+        </div>      
+        <?php }
     }
 ?>
       <?php       
         if(isset($_GET['id'])){
           $id = $_GET['id'] ;
-  
+        }
+        $dataExist = false;
         $db = new SQLite3('db/doraemon.db');
         $querySearchData = $db->prepare("select * from dorayaki where id = ?");
         $querySearchData->bindParam(1,$id);
         $searchResult = $querySearchData->execute();
-        $ada = 0;
-        while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){
-          $ada = 1; 
+
+        while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
+          $dataExist = true;
           $data = '<h1>'.$cek["nama"].'</h1>
                   <h2 class="price">Rp. <span id="hargaDorayaki">'.$cek["harga"].'</span></h2>
                   <h3 >Stok : <span id="dataStok">'.$cek["stok"].'</span></h3>
                   <h4 class="deskripsi">'.$cek["deskripsi"].'</h4> ';
-                  
-          $image = '<img src='.$cek["gambar"].' alt="">';
-          $stok = $cek["stok"];
-          $harga = $cek["harga"];
-        }
+                  $image = '<img src='.$cek["gambar"].' alt="">';
+                  $stok = $cek["stok"];
+                  $harga = $cek["harga"];
+                }
+        if (!$dataExist){
+          header('Location: '. "index.php");
+        }        
         
       ?>
-  <?php
-  if ($ada){
-  ?>
   <div class="detail-container">
     <div class="picture">
       <?php echo $image ?>
     </div>
     <div class="content">
       <?php echo $data ?>
-      <!-- <div class="pembelian"> -->
+      <!-- <div class="pembelian"> -->            
         <!-- <button onclick="console.log(document.getElementById('number').innerHTML)">Mangga</button> -->
         <form class="pembelian" action="checkPembelian.php" method="POST">
           <div id="decreaseButton" class="primary-button operation" onclick="decreaseItem()">-</div>
@@ -71,42 +86,51 @@ include "component/header.php";
           <input name="idVarian" type="hidden" value="<?php echo $_GET['id'] ?>"></input>
           <div id="increaseButton" class="primary-button operation" onclick="increaseItem()">+</div>
           <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input>
+          <?php if ($isAdmin){ ?>
+          <button name="buy" id="buyButton" class="primary-button buy">Add </button>
+            <?php } else { ?>
           <button id="buyButton" class="primary-button buy">Buy</button>
         </form>
+            <?php } ?>
+        
         <script>
           function decreaseItem(){
             var number = document.getElementById('number').value;
             const harga = <?php echo $harga ?>;
             number = parseInt(number) - 1;
-            if (number >= 0){
+            if (number >= 0 && !<?php echo ($isAdmin) ?>){
               document.getElementById('number').value = parseInt(number);
               document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
               if (number == 0){
                 document.getElementById('decreaseButton').classList.add('disabled');
                 document.getElementById('buyButton').classList.add('disabled');
               } else {
-                document.getElementById('increaseButton').classList.remove('disabled');
-                
+                document.getElementById('increaseButton').classList.remove('disabled');   
+              }              
+            } else {
+              document.getElementById('number').value = parseInt(number);
+              if (number == -1*<?php echo $stok ?>){
+                document.getElementById('decreaseButton').classList.add('disabled');
               }
+              document.getElementById('totalHarga').value = 'Rp. ' + 0;
             }
-
           }
           function increaseItem(){
             var number = document.getElementById('number').value;
             const harga = <?php echo $harga ?>;
             number = parseInt(number) + 1;
-            if (number <= <?php echo $stok ?>){
+            if (number <= <?php echo $stok ?> || <?php echo ($isAdmin) ?>){
               document.getElementById('number').value = parseInt(number);
               document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
-              if (number == <?php echo $stok ?>){
-                document.getElementById('increaseButton').classList.add('disabled');
-                
-              } else {
-                document.getElementById('decreaseButton').classList.remove('disabled');
-                document.getElementById('buyButton').classList.remove('disabled');
-                
-                
+              if (<?php echo ($isAdmin) ?>){
+                document.getElementById('totalHarga').value = 'Rp. ' + 0;
               }
+                if (number == <?php echo $stok ?> && <?php echo ($isAdmin) ?> == 0){
+                    document.getElementById('increaseButton').classList.add('disabled');
+                } else {
+                    document.getElementById('decreaseButton').classList.remove('disabled');
+                    document.getElementById('buyButton').classList.remove('disabled');
+                }
             }
           }
           function getStockData(){
@@ -128,6 +152,7 @@ include "component/header.php";
               getStockData();
             }, 5000);
           }
+
           getStockDataBerkala();
 
           <?php 
@@ -139,26 +164,23 @@ include "component/header.php";
             } ,
             5000)
             <?php 
-            } else if ($_GET["err"]==1){ ?>
+            } else if ($_GET["err"]=="1"){ ?>
             setTimeout( function() {
                 var sign = document.querySelector(".error-msg");
                 sign.classList.add("hide2");
             } ,
             5000)
-            <?php
+            <?php 
+            } else if ($_GET["err"]=="2"){ ?>
+              setTimeout( function() {
+                  var sign = document.querySelector(".error-msg.delete-msg");
+                  sign.classList.add("hide2");
+              } ,
+            <?php 
             }
-          ?>
+            ?>
         </script>
-      <!-- </div> -->
     </div>
   </div>
-  <?php
-            } else{
-              header('Location: '. "404.php");
-            }
-  } else{
-    header('Location: '. "404.php");
-  }
-  ?>
 </body>
 </html>
