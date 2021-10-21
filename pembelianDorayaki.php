@@ -104,9 +104,10 @@ include "component/header.php";
         <input name="jumlahBarang" id="number" type="text" class="data" value="1"></input>
         <input name="idVarian" type="hidden" value="<?php echo $_GET['id'] ?>"></input>
         <div id="increaseButton" class="primary-button operation" onclick="increaseItem()">+</div>
-        <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input>
+        <?php if (!$isAdmin) { ?>
+        <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input> <?php } ?>
         <?php if ($isAdmin){ ?>
-        <button name="buy" id="buyButton" class="primary-button buy">Add </button>
+        <button name="buy" id="buyButton" class="primary-button buy">Edit Stock</button>
           <?php } else { ?>
         <button id="buyButton" class="primary-button buy">Buy</button>
           <?php } ?>
@@ -132,7 +133,6 @@ include "component/header.php";
             if (number == -1*<?php echo $stok ?>){
               document.getElementById('decreaseButton').classList.add('disabled');
             }
-            document.getElementById('totalHarga').value = 'Rp. ' + 0;
           }
         }
         function increaseItem(){
@@ -142,9 +142,8 @@ include "component/header.php";
           number = parseInt(number) + 1;
           if (number <= <?php echo $stok ?> || <?php echo ($isAdmin) ?>){
             document.getElementById('number').value = parseInt(number);
-            document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
-            if (<?php echo ($isAdmin) ?>){
-              document.getElementById('totalHarga').value = 'Rp. ' + 0;
+            if (!<?php echo ($isAdmin) ?>){
+              document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
             }
               if (number == <?php echo $stok ?> && <?php echo ($isAdmin) ?> == 0){
                   document.getElementById('increaseButton').classList.add('disabled');

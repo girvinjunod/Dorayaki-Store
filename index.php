@@ -95,7 +95,7 @@ include "component/header.php";
                       ?> 
                       </h6>
                       </div>
-                      <a href="detailDorayaki.php?id=<?php echo $cek["id"] ?>"><button class="primary-button">BUY</button></a>
+                      <a href="detailDorayaki.php?id=<?php echo $cek["id"] ?>"><button class="primary-button">Details</button></a>
                   </div>
               </div>
             <?php } 

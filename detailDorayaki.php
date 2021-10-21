@@ -90,7 +90,12 @@ include "component/header.php";
       <?php } ?>  
     <?php echo $data ?>
       <div class="pembelian">
-        <a href="pembelianDorayaki.php?id=<?php echo $id ?>"><button class="primary-button detail">Buy</button></a>
+        <a href="pembelianDorayaki.php?id=<?php echo $id ?>"><button class="primary-button detail">
+          <?php
+            if ($isAdmin) { echo "Edit Stock";}
+            else {echo "Buy";}
+          ?>
+        </button></a>
       </div>
     </div>
   </div>
