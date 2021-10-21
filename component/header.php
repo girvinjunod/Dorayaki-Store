@@ -1,13 +1,5 @@
 <?php
 session_start();
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-  if ($_POST["query"]){
-    header('Location: '. "search.php?q=".$_POST["query"]);
-  } else {
-    header('Location: '. "search.php");
-  }
-
-}
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <img src="../assets/img/dorayaki.svg">
                 <a href="/"> <h2> ApelManggaKucing </h2> </a>
             </div>
-            <form method="POST" action="" class="form-search">
+            <form method="POST" action="../getSearchpage.php" class="form-search">
                 <input name="query" type="text" class="navbar-input" placeholder="Search for dorayaki here">
                 <button class="navbar-submit" type="submit"> <img src="../assets/img/search.svg" class="search-img"> </button>
             </form>
