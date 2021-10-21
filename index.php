@@ -82,7 +82,7 @@ include "component/header.php";
                           </h6>
                       </div>
                       <div class="subtitle">
-                          <h6> Rp <?php echo $cek['harga']  ?></h6>
+                          <h6> Rp<?php echo $cek['harga']  ?></h6>
                       </div>
                       <div class="content">
                         <h6>
