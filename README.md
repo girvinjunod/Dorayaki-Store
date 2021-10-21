@@ -9,20 +9,20 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 
 # Cara Instalasi
 ### Melalui Lokal
-1. Install PHP
-2. Install Apache Server
-3. Install SQLite
+1. Install PHP pada sistem operasi yang digunakan
+2. Install Apache Server pada sistem operasi yang digunakan
+3. Install SQLite pada sistem operasi yang digunakan
 
 ### Melalui Docker
-1. Install Docker
-2. Install Docker Compose
+1. Install Docker, dapat mengikuti panduan pada https://docs.docker.com/engine/install/
+2. Install Docker Compose, dapat mengikuti panduan pada https://docs.docker.com/compose/install/
 
 # Cara Menjalankan Server
 ### Melalui Lokal
-1. Jalankan `PHP -S localhost:4000` (4000 dapat diubah dengan port lainnya)
+1. Jalankan `PHP -S localhost:{port}` di directory repository ({port} dapat diganti dengan nilai seperti 8000)
 
 ### Melalui Docker
-1. Jalankan perintah `docker-compose up`
+1. Jalankan perintah `docker-compose up` di directory repository
 
 # Screenshot Tampilan Aplikasi
 
@@ -32,20 +32,27 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 
 - Register: 13519096
 - Riwayat: 13519096
-- AddVariant: 13519096
+- Add Variant: 13519096
 - Login: 13519048, 13519096
 - Dashboard: 13519048
-- Pencarian dan hasil pencarian:
-- Detail Dorayaki:
-- Pembelian/Pengubahan Stok Dorayaki:
+- Pencarian dan hasil pencarian: 13519090
+- Detail Dorayaki: 13519090
+- Pembelian/Pengubahan Stok Dorayaki: 13519090
 
 <ins>Client-side</ins>
 
 - Register: 13519096
 - Riwayat: 13519096
-- AddVariant: 13519096
+- Add Variant: 13519096
 - Login: 13519048
 - Dashboard: 13519048
-- Pencarian dan hasil pencarian:
-- Detail Dorayaki:
-- Pembelian/Pengubahan Stok Dorayaki:
+- Pencarian dan hasil pencarian: 13519090
+- Detail Dorayaki: 13519090
+- Pembelian/Pengubahan Stok Dorayaki: 13519090
+
+<ins>Misc</ins>
+
+- Docker: 13519096
+- Responsive Web: 13519090
+- Data Expire Time: 13519096
+- Debugging: 13519090, 13519096
