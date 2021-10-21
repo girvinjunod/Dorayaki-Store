@@ -80,6 +80,7 @@ body {
     columns: #460C01;
     font-weight: bold;
     cursor: pointer;
+    min-width: 8rem;
 }
 
 .navbar-button:active {
