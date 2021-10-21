@@ -1,3 +1,21 @@
+<?php
+$token = $_COOKIE['username'];
+$getuname = $db->prepare('SELECT username FROM login WHERE token = :token');
+$getuname->bindValue(':token', $token);
+$resUname = $getuname->execute();
+$unameArr = $resUname->fetchArray();
+$uname = $unameArr['username'];
+
+$statement = $db->prepare('SELECT is_admin FROM user WHERE username = :username');
+$statement->bindValue(':username', $uname);
+$result = $statement->execute();
+$account = $result->fetchArray();
+$isAdmin = false;
+if ($account != false) {
+    $isAdmin = $account["is_admin"];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +43,7 @@
                 <button class="navbar-submit" type="submit"> <img src="../assets/img/search.svg" class="search-img"> </button>
             </form>
             <?php
-                if ($_SESSION['isAdmin']){
+                if ($isAdmin){
             ?>
                 <a href="addVariant.php"> Add Variant </a>
                 <a href="riwayat.php"> Stock History </a>
@@ -38,7 +56,7 @@
             ?>
             <div class="dropdown">
                 <?php
-                    echo '<button class="navbar-button">'.$_SESSION['username'].'</button>';
+                    echo '<button class="navbar-button">'.$uname.'</button>';
                 ?>
                 <div class="dropdown-content hide-dropdown">
                 <form action="logout.php" method="post">

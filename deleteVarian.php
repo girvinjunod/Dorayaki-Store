@@ -1,5 +1,4 @@
 <?php
-session_start();
 $id = $_POST["delete"];
 $db = new SQLite3('db/doraemon.db');
 $queryDeleteVariant = $db->prepare("DELETE FROM dorayaki WHERE id = ?");

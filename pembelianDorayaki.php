@@ -1,12 +1,24 @@
 <?php
-session_start();
-if (!isset($_SESSION["username"])){
-    header('Location: '. "login.php");
+if(!isset($_COOKIE['username'])) {
+  header('Location: '. "login.php");
 }
-if (!$_SESSION['isAdmin']){
-    $isAdmin = 0;
-}else{
-    $isAdmin = 1;
+else{
+  $db = new SQLite3('db/doraemon.db');
+  $prep = $db->prepare('SELECT * from login where token=:token ORDER BY id_login desc LIMIT 1');
+  $token = $_COOKIE['username'];
+  $prep->bindParam(':token', $token);
+  $rescookie = $prep->execute();
+  $valid = 0;
+  while($rowcookie = $rescookie->fetchArray(SQLITE3_ASSOC)) {
+      $valid = 1;
+      if (time() - $rowcookie['time'] > 300){
+          $valid = 0;
+      }
+  }
+  if (!$valid){
+      setcookie("username", "", time() - 3600);
+      header('Location: '. "login.php");
+  }
 }
 ?>
 <!DOCTYPE html>

@@ -1,5 +1,4 @@
 <?php
-  session_start();
   $db = new SQLite3('db/doraemon.db');
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
   $id = $_REQUEST["id"];
@@ -11,9 +10,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
   }
   echo $data;
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $token = $_COOKIE['username'];
+    $getuname = $db->prepare('SELECT username FROM login WHERE token = :token');
+    $getuname->bindValue(':token', $token);
+    $resUname = $getuname->execute();
+    $unameArr = $resUname->fetchArray();
+    $uname = $unameArr['username'];
+    
+    $statement = $db->prepare('SELECT is_admin FROM user WHERE username = :username');
+    $statement->bindValue(':username', $uname);
+    $result = $statement->execute();
+    $account = $result->fetchArray();
+    $isAdmin = false;
+    if ($account != false) {
+        $isAdmin = $account["is_admin"];
+    }
     $id = $_POST["idVarian"];
     $jumlah = $_POST["jumlahBarang"];
-    $uname = $_SESSION["username"];
     $ambildata = $db->prepare("select * from dorayaki where id = ?");
     $ambildata->bindParam(1, $id);
     $datavarian = $ambildata->execute();
@@ -21,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
       $namavarian = $row["nama"];
       $harga = $row["harga"] * $jumlah;
     }
-  if (!$_SESSION['isAdmin']){
+  if (!$isAdmin){
     $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok - ? WHERE id = ?");
     $queryUpdateTotalPenjualan = $db->prepare("UPDATE dorayaki SET total_penjualan = total_penjualan + ? WHERE id = ?");
     $queryUpdateRiwayat = $db->prepare("INSERT INTO riwayat(id_varian, varian, username, harga, perubahan) VALUES(?, ?, ?, ?, ?)");

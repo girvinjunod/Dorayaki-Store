@@ -1,12 +1,44 @@
 <?php
-session_start();
-if (!isset($_SESSION["username"])){
-    header('Location: '. "login.php");
-  }
-if (!$_SESSION['isAdmin']){
-    header('Location: '. "index.php");
+if(!isset($_COOKIE['username'])) {
+  header('Location: '. "login.php");
 }
-
+else{
+  $db = new SQLite3('db/doraemon.db');
+  $prep = $db->prepare('SELECT * from login where token=:token ORDER BY id_login desc LIMIT 1');
+  $token = $_COOKIE['username'];
+  $prep->bindParam(':token', $token);
+  $rescookie = $prep->execute();
+  $valid = 0;
+  while($rowcookie = $rescookie->fetchArray(SQLITE3_ASSOC)) {
+      $valid = 1;
+      if (time() - $rowcookie['time'] > 300){
+          $valid = 0;
+      }
+  }
+  if (!$valid){
+      setcookie("username", "", time() - 3600);
+      header('Location: '. "login.php");
+  } else{
+    $token = $_COOKIE['username'];
+    $getuname = $db->prepare('SELECT username FROM login WHERE token = :token');
+    $getuname->bindValue(':token', $token);
+    $resUname = $getuname->execute();
+    $unameArr = $resUname->fetchArray();
+    $uname = $unameArr['username'];
+    
+    $statement = $db->prepare('SELECT is_admin FROM user WHERE username = :username');
+    $statement->bindValue(':username', $uname);
+    $result = $statement->execute();
+    $account = $result->fetchArray();
+    $isAdmin = false;
+    if ($account != false) {
+        $isAdmin = $account["is_admin"];
+    }
+    if (!$isAdmin){
+        header('Location: '. "index.php");
+    }
+  }
+}
 ?>
 <html lang="en">
 <head>

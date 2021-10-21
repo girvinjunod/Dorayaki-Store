@@ -1,10 +1,24 @@
 <?php
 session_start();
-
-if (isset($_SESSION["username"])){
-    header('Location: '. "index.php");
-  }
-
+if(isset($_COOKIE['username'])) {
+    $db = new SQLite3('db/doraemon.db');
+    $prep = $db->prepare('SELECT * from login where token=? ORDER BY id_login desc LIMIT 1');
+    $prep->bindParam(1, $_COOKIE['username']);
+    $rescookie = $prep->execute();
+    $valid = 0;
+    while($rowcookie = $rescookie->fetchArray(SQLITE3_ASSOC)) {
+        $valid = 1;
+        if (time() - $rowcookie['time'] > 300){
+            $valid = 0;
+        }
+    }
+    if ($valid){
+        header('Location: '. "index.php");
+    }
+    else{
+        setcookie("username", "", time() - 3600);
+    }
+}
 ?>
 
 <head>
