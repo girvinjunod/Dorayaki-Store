@@ -117,11 +117,5 @@ include "component/header.php";
     </div>
 </section>
 <!-- End of Item List -->
-
-
-<?php
-include "component/footer.php";
-?>
-
 </body>
 </html>
