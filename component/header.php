@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../assets/style.css">
     <link rel="stylesheet" href="../assets/dashboard.css">
     <link rel="stylesheet" href="../assets/itemlist.css">
+    <link rel="stylesheet" href="../assets/navbar.css">
 </head>
 <body>
     <header>
