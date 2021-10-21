@@ -8,32 +8,29 @@ include "component/header.php";
 
  <!-- Start of Dashboard -->
 <section class="dashboard">
-    <div class="container">
+    <div class="container index">
         <div class="paragraph">
             <div class="title">
                 <h1> 
-                    LOREM 
-                    <br> IPSUM DOLOR 
+                      ApelManggaKucing
                 </h1>
             </div>
             <div class="subtitle">
-                <h4> lorem ipsum dolor sit amet </h4>
+                <h4>Since 2021</h4>
             </div>
             <div class="content">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Dolor saepe necessitatibus quam eligendi suscipit animi 
-                assumenda vel laborum at nam natus quod, fuga beatae 
-                aperiam ad molestiae consequatur soluta voluptas?
+                ApelManggaKucing hadir menjadi toko dorayaki favorit anda, tidak perlu khawatir kami menyediakan banyak varian rasa yang tentunya sangat enak dan memiliki harga yang terjangkau.
+                Berikut 10 Dorayaki Best Seller
             </div>
-            <a href="#"> <button class="primary-button"> Learn More </button> </a>
+            <!-- <a href="#"> <button class="primary-button"> Learn More </button> </a> -->
         </div>
         <div class="flat">
             <img src="assets/img/doraemon1.png">
         </div>
     </div>
-    <div class="arrow-down">
+    <!-- <div class="arrow-down">
         <a href="#item-list"> &#8964; </a>
-    </div>
+    </div> -->
 </section>
 <!-- End of Dashboard -->
 
@@ -49,7 +46,9 @@ include "component/header.php";
             while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
               ?>
               <div class="card">
-                  <img src="<?php echo $cek['gambar'] ?>">
+                  <div class="card-image">
+                    <img src="<?php echo $cek['gambar'] ?>">
+                  </div>
                   <div class="card-content">
                       <div class="title">
                           <h6>

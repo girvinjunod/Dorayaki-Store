@@ -100,12 +100,14 @@ body {
     position: absolute;
     margin: 0;
     background: #FDE8B9;
-    border: solid 1px #460C01;
     padding: 10px 0 10px 0;
-    width: 100%;
+    width: 98%;
     bottom: -55px;
     display: flex;
     justify-content: center;
+    border-radius:  0 0 10px 10px;
+    top: 30px;
+
 }
 
 .hide-dropdown{

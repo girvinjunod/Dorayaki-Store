@@ -41,7 +41,7 @@ if (!isset($_SESSION["username"])){
           for(var count = 0; count < dataItem.length; count++)
             {
               input += '<div class="card">';
-              input += '<img src="'+ dataItem[count]["gambar"]+'">';
+              input += '<div class="card-image"><img src="'+ dataItem[count]["gambar"]+'"></div>';
               input += '<div class="card-content">';
               input += '<div class="title"><h6>'+(dataItem[count]["nama"].slice(0,15) + (dataItem[count]["nama"].length > 15 ? "..." : ""))+'</h6></div>';
               input += '<div class="subtitle"><h6>Rp. '+dataItem[count]["harga"]+'</h6></div>';
