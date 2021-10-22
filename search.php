@@ -31,6 +31,7 @@ else{
   <!-- <link rel="stylesheet" href="assets/global.css"> -->
   <link rel="stylesheet" href="assets/itemlist.css">
   <link rel="stylesheet" href="assets/search.css">
+  <link rel="icon" type="image/x-icon" href="assets/img/dorayaki.ico"/>
   <title>Search Result</title>
 </head>
 <body>

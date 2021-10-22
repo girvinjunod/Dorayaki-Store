@@ -24,6 +24,7 @@ if(isset($_COOKIE['username'])) {
 <head>
     <link rel="stylesheet" href="assets/global.css">
     <link rel="stylesheet" href="assets/login.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/dorayaki.ico"/>
     <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

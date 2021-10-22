@@ -55,6 +55,7 @@ else{
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/itemlist.css">
   <link rel="stylesheet" href="assets/addVariant.css">
+  <link rel="icon" type="image/x-icon" href="assets/img/dorayaki.ico"/>
 </head>
 <body>
 <?php
