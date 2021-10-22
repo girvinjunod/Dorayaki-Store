@@ -10,7 +10,9 @@ else{
   $rescookie = $prep->execute();
   $valid = 0;
   while($rowcookie = $rescookie->fetchArray(SQLITE3_ASSOC)) {
-      $valid = 1;
+    print_r($rowcookie);
+    $uname = $rowcookie['username'];  
+    $valid = 1;
       if (time() - $rowcookie['time'] > 300){
           $valid = 0;
       }
@@ -18,6 +20,28 @@ else{
   if (!$valid){
       setcookie("username", "", time() - 3600);
       header('Location: '. "login.php");
+  }
+  if(isset($_GET['id'])){
+    $statement = $db->prepare('SELECT is_admin FROM user WHERE username = :username');
+    $statement->bindValue(':username', $uname);
+    $result = $statement->execute();
+    $account = $result->fetchArray();
+    $isAdmin = false;
+    if ($account != false) {
+        $isAdmin = $account["is_admin"];
+    }
+    $id = $_GET['id'] ;
+    $querySearchData = $db->prepare("select * from dorayaki where id = ?");
+    $querySearchData->bindParam(1,$id);
+    $searchResult = $querySearchData->execute();
+    while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
+      $stok = $cek["stok"];
+    }
+    if (!$isAdmin && $stok == 0){
+      header('Location: '. "detailDorayaki.php?id=".$id);
+    }
+  } else {
+    header('Location: '. "404.php");
   }
 }
 ?>
