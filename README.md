@@ -66,6 +66,7 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
    #### Admin Detail Variant
 
    ![Admin Detail Page](./screenshot/detail_admin.png)
+   ![Edit Detail Page](./screenshot/edit_admin.png)
 
 7. Halaman Pengubahan Stok / Pembelian Dorayaki
    ![Pembelian Page](./screenshot/pembelian_user.png)
