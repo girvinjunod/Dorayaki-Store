@@ -10,7 +10,6 @@ else{
   $rescookie = $prep->execute();
   $valid = 0;
   while($rowcookie = $rescookie->fetchArray(SQLITE3_ASSOC)) {
-    print_r($rowcookie);
     $uname = $rowcookie['username'];  
     $valid = 1;
       if (time() - $rowcookie['time'] > 300){

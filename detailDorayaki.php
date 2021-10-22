@@ -54,6 +54,7 @@ include "component/header.php";
           <h4 class="deskripsi">'.$cek["deskripsi"].'</h4> ';
           $image = '<img src='.$cek["gambar"].' alt="">';
           $dataExist = true;
+          $cekstok = $cek["stok"];
         }
         if (!$dataExist){
           ?>
@@ -90,13 +91,18 @@ include "component/header.php";
       <?php } ?>  
     <?php echo $data ?>
       <div class="pembelian">
-        <a href="pembelianDorayaki.php?id=<?php echo $id ?>"><button class="primary-button detail">
+        <a id="link-buy" href="pembelianDorayaki.php?id=<?php echo $id ?>"><button class="primary-button detail">
           <?php
             if ($isAdmin) { echo "Edit Stock";}
             else {echo "Buy";}
           ?>
         </button></a>
       </div>
+      <script>
+        if (<?php echo $cekstok ?> ==0){
+          document.getElementById('link-buy').classList.add('disabled');
+        }
+      </script>
     </div>
   </div>
 </body>
