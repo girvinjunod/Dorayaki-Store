@@ -95,7 +95,7 @@ include "component/header.php";
         while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
           $dataExist = true;
           $data = '<h1>'.$cek["nama"].'</h1>
-                  <h2 class="price">Rp. <span id="hargaDorayaki">'.$cek["harga"].'</span></h2>
+                  <h2 class="price">Rp<span id="hargaDorayaki">'.$cek["harga"].'</span></h2>
                   <h3 >Stok : <span id="dataStok">'.$cek["stok"].'</span></h3>
                   <h4 class="deskripsi">'.$cek["deskripsi"].'</h4> ';
                   $image = '<img src='.$cek["gambar"].' alt="">';
@@ -128,7 +128,7 @@ include "component/header.php";
         <input name="idVarian" type="hidden" value="<?php echo $_GET['id'] ?>"></input>
         <div id="increaseButton" class="primary-button operation" onclick="increaseItem()">+</div>
         <?php if (!$isAdmin) { ?>
-        <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input> <?php } ?>
+        <input id="totalHarga" type="text" class="data totalprice" value="Rp<?php echo $harga ?>"></input> <?php } ?>
         <?php if ($isAdmin){ ?>
         <button name="buy" id="buyButton" class="primary-button buy">Edit Stock</button>
           <?php } else { ?>
@@ -144,7 +144,7 @@ include "component/header.php";
           number = parseInt(number) - 1;
           if (number >= 0 && !<?php echo ($isAdmin) ?>){
             document.getElementById('number').value = parseInt(number);
-            document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
+            document.getElementById('totalHarga').value = 'Rp' + parseInt(number)*parseInt(harga);
             if (number == 0){
               document.getElementById('decreaseButton').classList.add('disabled');
               document.getElementById('buyButton').classList.add('disabled');
@@ -165,7 +165,7 @@ include "component/header.php";
           if (number <= <?php echo $stok ?> || <?php echo ($isAdmin) ?>){
             document.getElementById('number').value = parseInt(number);
             if (!<?php echo ($isAdmin) ?>){
-              document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
+              document.getElementById('totalHarga').value = 'Rp' + parseInt(number)*parseInt(harga);
             }
               if (number == <?php echo $stok ?> && <?php echo ($isAdmin) ?> == 0){
                   document.getElementById('increaseButton').classList.add('disabled');

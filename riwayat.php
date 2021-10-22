@@ -74,7 +74,7 @@ include "component/header.php";
 
                 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
                     echo "<tr>";
-                    echo "<td>" . "<a href='" . "pembelianDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
+                    echo "<td>" . "<a href='" . "detailDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
                     echo "<td>" . $row["username"] . "</td>";
                     echo "<td>" . $row["perubahan"] . "</td>";
                     echo "<td>" . $row["harga"] . "</td>";
@@ -115,7 +115,7 @@ include "component/header.php";
 
                 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
                     echo "<tr>";
-                    echo "<td>" . "<a href='" . "pembelianDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
+                    echo "<td>" . "<a href='" . "detailDorayaki.php?id=" . $row['id_varian'] . "'>" . $row["varian"] . "</a></td>";
                     echo "<td>" . abs($row["perubahan"]) . "</td>";
                     echo "<td>" . $row["harga"] . "</td>";
                     echo "<td>" . $row["waktu"] . "</td>";

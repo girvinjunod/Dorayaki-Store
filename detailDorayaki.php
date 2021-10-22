@@ -67,7 +67,7 @@ include "component/header.php";
         while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){
           $ada = 1; 
           $data = '<h1>'.$cek["nama"].'</h1>
-          <h2 class="price">Rp. <span id="hargaDorayaki">'.$cek["harga"].'</span></h2>
+          <h2 class="price">Rp<span id="hargaDorayaki">'.$cek["harga"].'</span></h2>
           <h3 >Stok : <span id="dataStok">'.$cek["stok"].'</span></h3>
           <h4 class="deskripsi">'.$cek["deskripsi"].'</h4> ';
           $image = '<img src='.$cek["gambar"].' alt="">';
