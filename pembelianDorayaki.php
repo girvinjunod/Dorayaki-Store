@@ -10,7 +10,8 @@ else{
   $rescookie = $prep->execute();
   $valid = 0;
   while($rowcookie = $rescookie->fetchArray(SQLITE3_ASSOC)) {
-      $valid = 1;
+    $uname = $rowcookie['username'];  
+    $valid = 1;
       if (time() - $rowcookie['time'] > 300){
           $valid = 0;
       }
@@ -18,6 +19,28 @@ else{
   if (!$valid){
       setcookie("username", "", time() - 3600);
       header('Location: '. "login.php");
+  }
+  if(isset($_GET['id'])){
+    $statement = $db->prepare('SELECT is_admin FROM user WHERE username = :username');
+    $statement->bindValue(':username', $uname);
+    $result = $statement->execute();
+    $account = $result->fetchArray();
+    $isAdmin = false;
+    if ($account != false) {
+        $isAdmin = $account["is_admin"];
+    }
+    $id = $_GET['id'] ;
+    $querySearchData = $db->prepare("select * from dorayaki where id = ?");
+    $querySearchData->bindParam(1,$id);
+    $searchResult = $querySearchData->execute();
+    while ($cek = $searchResult->fetchArray(SQLITE3_ASSOC)){ 
+      $stok = $cek["stok"];
+    }
+    if (!$isAdmin && $stok == 0){
+      header('Location: '. "detailDorayaki.php?id=".$id);
+    }
+  } else {
+    header('Location: '. "404.php");
   }
 }
 ?>
@@ -104,9 +127,10 @@ include "component/header.php";
         <input name="jumlahBarang" id="number" type="text" class="data" value="1"></input>
         <input name="idVarian" type="hidden" value="<?php echo $_GET['id'] ?>"></input>
         <div id="increaseButton" class="primary-button operation" onclick="increaseItem()">+</div>
-        <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input>
+        <?php if (!$isAdmin) { ?>
+        <input id="totalHarga" type="text" class="data totalprice" value="Rp. <?php echo $harga ?>"></input> <?php } ?>
         <?php if ($isAdmin){ ?>
-        <button name="buy" id="buyButton" class="primary-button buy">Add </button>
+        <button name="buy" id="buyButton" class="primary-button buy">Edit Stock</button>
           <?php } else { ?>
         <button id="buyButton" class="primary-button buy">Buy</button>
           <?php } ?>
@@ -124,15 +148,13 @@ include "component/header.php";
             if (number == 0){
               document.getElementById('decreaseButton').classList.add('disabled');
               document.getElementById('buyButton').classList.add('disabled');
-            } else {
-              document.getElementById('increaseButton').classList.remove('disabled');   
-            }              
+            }
+            document.getElementById('increaseButton').classList.remove('disabled');                
           } else {
             document.getElementById('number').value = parseInt(number);
             if (number == -1*<?php echo $stok ?>){
               document.getElementById('decreaseButton').classList.add('disabled');
             }
-            document.getElementById('totalHarga').value = 'Rp. ' + 0;
           }
         }
         function increaseItem(){
@@ -142,16 +164,14 @@ include "component/header.php";
           number = parseInt(number) + 1;
           if (number <= <?php echo $stok ?> || <?php echo ($isAdmin) ?>){
             document.getElementById('number').value = parseInt(number);
-            document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
-            if (<?php echo ($isAdmin) ?>){
-              document.getElementById('totalHarga').value = 'Rp. ' + 0;
+            if (!<?php echo ($isAdmin) ?>){
+              document.getElementById('totalHarga').value = 'Rp. ' + parseInt(number)*parseInt(harga);
             }
               if (number == <?php echo $stok ?> && <?php echo ($isAdmin) ?> == 0){
                   document.getElementById('increaseButton').classList.add('disabled');
-              } else {
-                  document.getElementById('decreaseButton').classList.remove('disabled');
-                  document.getElementById('buyButton').classList.remove('disabled');
               }
+              document.getElementById('decreaseButton').classList.remove('disabled');
+              document.getElementById('buyButton').classList.remove('disabled');
           }
         }
         function getStockData(){

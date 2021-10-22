@@ -31,11 +31,29 @@ else{
   <link rel="stylesheet" href="assets/detailDorayaki.css">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/itemlist.css">
+  <link rel="stylesheet" href="assets/addVariant.css">
 </head>
 <body>
 <?php
 include "component/header.php";
-?>  
+?>
+<?php 
+    if (isset($_GET["err"])){
+        if($_GET["err"]=="0"){
+        ?>
+        <div class="success-msg">
+            <p class="msg">Transaction Success</p>
+        </div>
+
+        <?php 
+        } else if ($_GET["err"]==1){ ?>
+        <div class="error-msg">
+            <p>Transaction Failed, please try again</p>
+        </div>
+        <?php }
+    }
+?>
+
       <?php 
         if(isset($_GET['id'])){
           $id = $_GET['id'] ;
@@ -54,6 +72,7 @@ include "component/header.php";
           <h4 class="deskripsi">'.$cek["deskripsi"].'</h4> ';
           $image = '<img src='.$cek["gambar"].' alt="">';
           $dataExist = true;
+          $cekstok = $cek["stok"];
         }
         if (!$dataExist){
           ?>
@@ -90,8 +109,42 @@ include "component/header.php";
       <?php } ?>  
     <?php echo $data ?>
       <div class="pembelian">
-        <a href="pembelianDorayaki.php?id=<?php echo $id ?>"><button class="primary-button detail">Buy</button></a>
+        <a id="link-buy" href="pembelianDorayaki.php?id=<?php echo $id ?>"><button class="primary-button detail">
+          <?php
+            if ($isAdmin) { echo "Edit Stock";}
+            else {echo "Buy";}
+          ?>
+        </button></a>
       </div>
+      <script>
+      <?php
+        if ($cekstok == 0 and !$isAdmin){
+      ?>
+          document.getElementById('link-buy').classList.add('disabled');
+          <?php
+        }
+          ?>
+        <?php 
+        if (isset($_GET["err"])){
+            if($_GET["err"]=="0"){
+            ?>
+            setTimeout( function() {
+                var sign = document.querySelector(".success-msg");
+                sign.classList.add("hide2");
+            } ,
+            5000)
+            <?php 
+            } else if ($_GET["err"]=="1"){ ?>
+            setTimeout( function() {
+                var sign = document.querySelector(".error-msg");
+                sign.classList.add("hide2");
+            } ,
+            5000)
+            <?php 
+            }
+          }
+          ?>
+      </script>
     </div>
   </div>
 </body>

@@ -1,0 +1,14 @@
+@media only screen and (max-width: 800px){
+  .navbar .logo img{
+    width: 3rem;
+  }
+  .navbar a{
+    font-size: 0.8rem;
+  }
+  .navbar .logo a{
+    font-size: 0.8rem;
+  }
+  .navbar-input{
+    width: 10vw;
+  }
+}

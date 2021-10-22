@@ -125,3 +125,13 @@ body {
   font-size: 0.8rem;
   padding-left: 2px;
 }
+@media only screen and (max-width: 800px){
+  .gambar{
+    width: 45rem ;
+    position: absolute;
+    left: -15rem;
+  }
+  .form-register{
+    z-index: 1;
+  }
+}

@@ -14,7 +14,7 @@
 .picture img {
   object-fit: cover;
   height: 100%;
-  width: 25rem;
+  max-width: 25rem;
   border-radius: 10px 0px 0px 10px;
 }
 .content{
@@ -32,7 +32,7 @@
   justify-content: center;
   align-items: flex-end;
   flex-grow: 1;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .pembelian .primary-button{
@@ -42,10 +42,11 @@
 }
 .pembelian .primary-button.detail{
   width: 20rem;
+  margin-top: 1rem;
 }
 
 .pembelian .primary-button.buy{
-  width: 5rem;
+  width: 7rem;
   margin-left: 2rem;
   margin-top: 1.5rem;
   cursor: pointer;
@@ -142,9 +143,35 @@ h2.price{
 }
 
 .primary-button.edit{
-  margin-right: 10rem;
+  margin-right: 5rem;
 }
 .container-relative{
-  position: absolute;
+  /* position: absolute; */
   width: 90%;
+}
+
+@media only screen and (max-width: 800px){
+  .content{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .pembelian .primary-button.detail{
+    width: 15rem;
+  }
+  .detail-container{
+    width: 70vw;
+  }
+  .primary-button.edit{
+    margin-right: 7rem;
+  }
+  .picture img{
+    max-width: 15rem;
+  }
+  #buyButton, #number{
+    margin: 0;
+  }
+  .data.totalprice{
+    font-size: 1rem;
+    width: 6rem;
+  }
 }
