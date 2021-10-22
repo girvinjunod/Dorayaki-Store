@@ -106,6 +106,7 @@ if(isset($_COOKIE['username'])) {
             req.onload = function (){
                 if (this){
                     if (this.responseText) {
+                        console.log(this.responseText);
                         console.log("benar");
                         msg.classList.add("hide");
                         input.classList.add("correct");
@@ -117,7 +118,7 @@ if(isset($_COOKIE['username'])) {
                     }
                 }
             }
-            req.open("GET", "checkRegister.php?email=" + email);
+            req.open("GET", "checkRegister.php?email=" + email + "&uname=&password=&confirmpassword=");
             req.send()
         } else{
             msg.classList.add("hide");
@@ -144,7 +145,7 @@ if(isset($_COOKIE['username'])) {
                     }
                 }
             }
-            req.open("GET", "checkRegister.php?uname=" + uname);
+            req.open("GET", "checkRegister.php?uname=" + uname+ "&email=&password=&confirmpassword=");
             req.send()
         }
         else{
@@ -169,7 +170,7 @@ if(isset($_COOKIE['username'])) {
                     }
                 }
             }
-            req.open("GET", "checkRegister.php?password=" + password);
+            req.open("GET", "checkRegister.php?password=" + password+ "&uname=&email=&confirmpassword=");
             req.send();
         } else{
             msg.classList.add("hide");
@@ -198,7 +199,7 @@ if(isset($_COOKIE['username'])) {
                 }
             }
             var password = document.querySelector(".pass").value;
-            req.open("GET", "checkRegister.php?confirmpassword=" + conpassword + "&password=" + password);
+            req.open("GET", "checkRegister.php?confirmpassword=" + conpassword + "&password=" + password+ "&uname=&email=");
             req.send()
         } else{
             msg.classList.add("hide");
@@ -207,7 +208,8 @@ if(isset($_COOKIE['username'])) {
         }
     }
 
-    <?php 
+    <?php
+    if (isset($_GET["err"])){
     if ($_GET["err"]==1){ ?>
     setTimeout( function() {
         
@@ -219,6 +221,7 @@ if(isset($_COOKIE['username'])) {
 
     <?php
     }
+}
     ?>
 
 
