@@ -30,6 +30,7 @@ else{
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/img/dorayaki.ico"/>
     <title>History</title>
 </head>
 <body>
@@ -69,7 +70,7 @@ include "component/header.php";
                     echo "<th>Username</th>";
                     echo "<th>Stock Change</th>";
                     echo "<th>Price</th>";
-                    echo "<th>Time</th>";
+                    echo "<th>Time (UTC)</th>";
                 echo "</tr>";
 
                 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
@@ -110,7 +111,7 @@ include "component/header.php";
                     echo "<th>Variant Name</th>";
                     echo "<th>Amount</th>";
                     echo "<th>Price</th>";
-                    echo "<th>Time</th>";
+                    echo "<th>Time (UTC)</th>";
                 echo "</tr>";
 
                 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
