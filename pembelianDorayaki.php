@@ -10,7 +10,6 @@ else{
   $rescookie = $prep->execute();
   $valid = 0;
   while($rowcookie = $rescookie->fetchArray(SQLITE3_ASSOC)) {
-    print_r($rowcookie);
     $uname = $rowcookie['username'];  
     $valid = 1;
       if (time() - $rowcookie['time'] > 300){
@@ -149,9 +148,8 @@ include "component/header.php";
             if (number == 0){
               document.getElementById('decreaseButton').classList.add('disabled');
               document.getElementById('buyButton').classList.add('disabled');
-            } else {
-              document.getElementById('increaseButton').classList.remove('disabled');   
-            }              
+            }
+            document.getElementById('increaseButton').classList.remove('disabled');                
           } else {
             document.getElementById('number').value = parseInt(number);
             if (number == -1*<?php echo $stok ?>){
@@ -171,10 +169,9 @@ include "component/header.php";
             }
               if (number == <?php echo $stok ?> && <?php echo ($isAdmin) ?> == 0){
                   document.getElementById('increaseButton').classList.add('disabled');
-              } else {
-                  document.getElementById('decreaseButton').classList.remove('disabled');
-                  document.getElementById('buyButton').classList.remove('disabled');
               }
+              document.getElementById('decreaseButton').classList.remove('disabled');
+              document.getElementById('buyButton').classList.remove('disabled');
           }
         }
         function getStockData(){
