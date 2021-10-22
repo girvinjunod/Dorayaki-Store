@@ -63,7 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
       $updateResult = $queryUpdateData->execute();
       $updateTotalPenjualanResult = $queryUpdateTotalPenjualan->execute();
       if ($updateResult && $updateTotalPenjualanResult && $updateRiwayat){
-        header('Location: '. "pembelianDorayaki.php?id=".$id."&err=0");
+        if($jumlah==$data){
+          header('Location: '. "detailDorayaki.php?id=".$id."&err=0");
+        }
+        else{
+          header('Location: '. "pembelianDorayaki.php?id=".$id."&err=0");
+        }
       } else {
         header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
       }
@@ -87,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
           $updateResult = $queryUpdateData->execute();
           $jumlahDikurang = $jumlah * -1;
           if ($updateResult && $updateRiwayat){
-            header('Location: '. "pembelianDorayaki.php?id=".$id."&err=0");
+              header('Location: '. "pembelianDorayaki.php?id=".$id."&err=0");
           } else {
             header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
           }

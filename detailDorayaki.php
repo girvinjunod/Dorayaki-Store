@@ -31,11 +31,29 @@ else{
   <link rel="stylesheet" href="assets/detailDorayaki.css">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/itemlist.css">
+  <link rel="stylesheet" href="assets/addVariant.css">
 </head>
 <body>
 <?php
 include "component/header.php";
-?>  
+?>
+<?php 
+    if (isset($_GET["err"])){
+        if($_GET["err"]=="0"){
+        ?>
+        <div class="success-msg">
+            <p class="msg">Transaction Success</p>
+        </div>
+
+        <?php 
+        } else if ($_GET["err"]==1){ ?>
+        <div class="error-msg">
+            <p>Transaction Failed, please try again</p>
+        </div>
+        <?php }
+    }
+?>
+
       <?php 
         if(isset($_GET['id'])){
           $id = $_GET['id'] ;
@@ -99,9 +117,33 @@ include "component/header.php";
         </button></a>
       </div>
       <script>
-        if (<?php echo $cekstok ?> ==0){
+      <?php
+        if ($cekstok == 0 and !$isAdmin){
+      ?>
           document.getElementById('link-buy').classList.add('disabled');
+          <?php
         }
+          ?>
+        <?php 
+        if (isset($_GET["err"])){
+            if($_GET["err"]=="0"){
+            ?>
+            setTimeout( function() {
+                var sign = document.querySelector(".success-msg");
+                sign.classList.add("hide2");
+            } ,
+            5000)
+            <?php 
+            } else if ($_GET["err"]=="1"){ ?>
+            setTimeout( function() {
+                var sign = document.querySelector(".error-msg");
+                sign.classList.add("hide2");
+            } ,
+            5000)
+            <?php 
+            }
+          }
+          ?>
       </script>
     </div>
   </div>
