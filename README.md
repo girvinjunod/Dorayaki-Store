@@ -38,6 +38,7 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 - Pencarian dan hasil pencarian: 13519090
 - Detail Dorayaki: 13519090
 - Pembelian/Pengubahan Stok Dorayaki: 13519090
+- Edit & Delete Variant Dorayaki : 13519090
 
 <ins>Client-side</ins>
 
@@ -49,6 +50,9 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 - Pencarian dan hasil pencarian: 13519090
 - Detail Dorayaki: 13519090
 - Pembelian/Pengubahan Stok Dorayaki: 13519090
+- Edit & Delete Variant Dorayaki : 13519090
+- Navbar, Komponen HTML : 13519048
+
 
 <ins>Misc</ins>
 
