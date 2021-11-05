@@ -39,7 +39,7 @@ if ($account != false) {
                 <img src="../assets/img/dorayaki.svg">
                 <a href="/"> <h2> ApelManggaKucing </h2> </a>
             </div>
-            <form method="POST" action="../getSearchPage.php" class="form-search">
+            <form method="GET" action="../getSearchPage.php" class="form-search">
                 <input name="query" type="text" class="navbar-input" placeholder="Search for dorayaki here">
                 <button class="navbar-submit" type="submit"> <img src="../assets/img/search.svg" class="search-img"> </button>
             </form>

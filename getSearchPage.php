@@ -1,7 +1,7 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-  if ($_POST["query"]){
-    header('Location: '. "search.php?q=".$_POST["query"]);
+if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+  if ($_GET["query"]){
+    header('Location: '. "search.php?q=".$_GET["query"]);
   } else {
     header('Location: '. "search.php");
   }
