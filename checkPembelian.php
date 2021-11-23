@@ -79,7 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
           header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
         } else {
             $soapclient = new SoapClient('http://localhost:8080/webservice/apelmanggakucing?wsdl');
-            $params = array('arg0' => '127.0.0.1:4040', 'arg1' => 'http://localhost:8080/webservice/apelmanggakucing', 'arg2'=>$id, 'arg3'=>$jumlah);
+            $ip_server = $_SERVER['REMOTE_ADDR'];
+            $ip_port = $_SERVER['SERVER_PORT'];
+            $ip_data = $ip_server.':'.$ip_port;
+            $params = array('arg0' => $ip_data, 'arg1' => 'http://localhost:8080/webservice/apelmanggakucing', 'arg2'=>$id, 'arg3'=>$jumlah);
             $response = $soapclient->addRequest($params);
             foreach ($response as $value){
               $newdata = $value;
