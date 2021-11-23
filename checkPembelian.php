@@ -74,29 +74,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
       }
     }
   } else {
-        if ($jumlah*-1 > $data || $jumlah == 0){
+
+        if ($jumlah*-1 > $data || $jumlah <= 0){ // TODO: Bisa negatif?
           header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
         } else {
-          $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok + ? WHERE id = ?");
-          $queryUpdateRiwayat = $db->prepare("INSERT INTO riwayat(id_varian, varian, username, perubahan) VALUES(?, ?, ?, ?)");
-        
-          $queryUpdateData->bindParam(1,$jumlah);
-          $queryUpdateData->bindParam(2,$id);
-      
-          $queryUpdateRiwayat->bindParam(1, $id);
-          $queryUpdateRiwayat->bindParam(2, $namavarian);
-          $queryUpdateRiwayat->bindParam(3, $uname);
-          // $queryUpdateRiwayat->bindParam(4, $harga);
-          $queryUpdateRiwayat->bindParam(4, $jumlah);       
-          $updateRiwayat = $queryUpdateRiwayat->execute();
-          $updateResult = $queryUpdateData->execute();
-          $jumlahDikurang = $jumlah * -1;
-          if ($updateResult && $updateRiwayat){
+            $soapclient = new SoapClient('http://localhost:8080/webservice/apelmanggakucing?wsdl');
+            $params = array('arg0' => '127.0.0.1:4040', 'arg1' => 'http://localhost:8080/webservice/apelmanggakucing', 'arg2'=>$id, 'arg3'=>$jumlah);
+            $response = $soapclient->addRequest($params);
+            foreach ($response as $value){
+              $newdata = $value;
+            }
+            if ($newdata == '1'){
               header('Location: '. "pembelianDorayaki.php?id=".$id."&err=0");
-          } else {
-            header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
+            } else {
+              header('Location: '. "pembelianDorayaki.php?id=".$id."&err=1");
+            }
+        
           }
-        }
       }
 }
 $db->close();
