@@ -1,0 +1,8 @@
+Command untuk menyalakan cronjob, dengna aplikasi crontab
+
+1. Install Crontab (sudo apt install cron)
+2. Nyalakan crontab (service crond start / sudo service crond start)
+3. Pastikan crontab menyala (service crond status / sudo service crond status)
+4. Isi crontab jika belum ada 
+    '*/1 * * * * /mnt/d/Kuliah/Semester5/WBD/tubes2/dorayaki-store/cronjob.php'
+    '*/1 * * * * full_path/cronjob.php'
