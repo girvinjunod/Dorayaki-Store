@@ -125,6 +125,30 @@ include "component/header.php";
           <?php
         }
           ?>
+        function getStockData(){
+          const req = new XMLHttpRequest();
+          req.open("GET","checkPembelian.php?id=" + <?php echo $_GET["id"]?>);
+          req.send();
+          req.onload = function(){
+            if (this){
+              console.log("kucing");
+              console.log(this.responseText);
+              if (parseInt(this.responseText) != parseInt(document.getElementById('dataStok').innerHTML)){
+                document.getElementById('dataStok').innerHTML = parseInt(this.responseText)
+              }
+            }
+          }
+
+        }
+        function getStockDataBerkala(){
+          // var myid = setInterval(getStockData(),5000)
+          setInterval(() => {
+            getStockData();
+          }, 5000);
+        }
+
+        getStockDataBerkala();
+        
         <?php 
         if (isset($_GET["err"])){
             if($_GET["err"]=="0"){

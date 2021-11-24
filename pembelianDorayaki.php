@@ -66,7 +66,17 @@ include "component/header.php";
         if($_GET["err"]=="0"){
         ?>
         <div class="success-msg">
+          <?php
+            if ($isAdmin){
+          ?>
+            <p class="msg">Request Sent Successfully</p>
+          <?php 
+            } else{
+          ?>
             <p class="msg">Transaction Success</p>
+          <?php 
+            }
+          ?>
         </div>
 
         <?php 
@@ -131,7 +141,7 @@ include "component/header.php";
         <?php if (!$isAdmin) { ?>
         <input id="totalHarga" type="text" class="data totalprice" value="Rp<?php echo $harga ?>"></input> <?php } ?>
         <?php if ($isAdmin){ ?>
-        <button name="buy" id="buyButton" class="primary-button buy">Edit Stock</button>
+        <button name="buy" id="buyButton" class="primary-button buy">Send Request</button>
           <?php } else { ?>
         <button id="buyButton" class="primary-button buy">Buy</button>
           <?php } ?>
@@ -153,8 +163,9 @@ include "component/header.php";
             document.getElementById('increaseButton').classList.remove('disabled');                
           } else {
             document.getElementById('number').value = parseInt(number);
-            if (number == -1*<?php echo $stok ?>){
+            if (number == 0){
               document.getElementById('decreaseButton').classList.add('disabled');
+              document.getElementById('buyButton').classList.add('disabled');
             }
           }
         }

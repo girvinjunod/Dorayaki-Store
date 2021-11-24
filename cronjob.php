@@ -27,7 +27,8 @@ function updateDatabase($db,$id_recipe,$change){
   $updateResult = $queryUpdateData->execute();
 }
 try{
-  $db = new SQLite3('/mnt/d/Kuliah/Semester5/WBD/tubes2/dorayaki-store/db/doraemon.db'); // CHANGE TO FULL PATH
+  // $db = new SQLite3('/mnt/d/Kuliah/Semester5/WBD/tubes2/dorayaki-store/db/doraemon.db'); // CHANGE TO FULL PATH
+  $db = new SQLite3('/mnt/d/coding/wbd/tubes2/dorayaki-store/db/doraemon.db');
   $soapclient = new SoapClient('http://localhost:8080/webservice/apelmanggakucing/?wsdl');
   $ip_server = '127.0.0.1';
   // $ip_port = $_SERVER['SERVER_PORT'];
