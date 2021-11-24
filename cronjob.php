@@ -36,6 +36,7 @@ $response = $soapclient->getStatusRequest($params);
 // var_dump($response);
 // print_r($response)
 $is_empty = true;
+$newarray = array();
 foreach ($response as $value) {
   $newarray = $value;
   $is_empty = false;
