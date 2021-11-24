@@ -20,7 +20,7 @@ function updateDatabase($db,$id_recipe,$change){
 
   $queryUpdateRiwayat->bindParam(1, $id);
   $queryUpdateRiwayat->bindParam(2, $namavarian);
-  $uname = "System";
+  $uname = "Admin";
   $queryUpdateRiwayat->bindParam(3, $uname);
   $queryUpdateRiwayat->bindParam(4, $change);       
   $updateRiwayat = $queryUpdateRiwayat->execute();
