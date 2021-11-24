@@ -80,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
         } else {
             $soapclient = new SoapClient('http://localhost:8080/webservice/apelmanggakucing?wsdl');
             $ip_server = $_SERVER['REMOTE_ADDR'];
-            $ip_port = $_SERVER['SERVER_PORT'];
-            $ip_data = $ip_server.':'.$ip_port;
+            // $ip_port = $_SERVER['SERVER_PORT'];
+            $ip_data = $ip_server;
 
             $ambildata = $db->prepare("select * from dorayaki where id = ?");
             $ambildata->bindParam(1, $id);
