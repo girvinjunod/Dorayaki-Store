@@ -9,6 +9,7 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 2. SQLite3
 3. Apache Server
 4. Web Browser versi terbaru
+5. Cron
 
 ### Melalui Docker
 1. Docker
@@ -22,6 +23,7 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 1. Install PHP pada sistem operasi yang digunakan
 2. Install Apache Server pada sistem operasi yang digunakan
 3. Install SQLite pada sistem operasi yang digunakan
+4. Install Cron pada sistem operasi yang digunakan
 
 ### Melalui Docker
 
@@ -32,13 +34,20 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 
 ### Melalui Lokal
 
-1. Jalankan `PHP -S localhost:{port}` di directory repository ({port} dapat diganti dengan nilai seperti 8000)
-2. Buka melalui web browser di localhost:{port}
+1. Jalankan Cron dan isi crontab dengan job path ke file `cronjob.php`
+2. Jalankan `PHP -S localhost:{port}` di directory repository ({port} dapat diganti dengan nilai seperti 8000)
+3. Buka melalui web browser di localhost:{port}
 
 ### Melalui Docker
 
 1. Jalankan perintah `docker-compose up` di directory repository
 2. Buka melalui web browser di localhost:4000
+
+# Perbaharuan Aplikasi
+1. Perubahan skema basis data dengan menambah id resep ke tabel dorayaki
+2. Perubahan edit stok oleh admin menjadi membuat request penambahan stok ke pabrik melaui web service.
+3. Update stok berdasarkan status request menggunakan cronjob dan web service
+
 
 # Screenshot Tampilan Aplikasi
 
@@ -131,3 +140,4 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 - Responsive Web: 13519090
 - Data Expire Time: 13519096
 - Debugging: 13519090, 13519096
+- Cron: 13519090
