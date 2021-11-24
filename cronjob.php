@@ -2,22 +2,23 @@
 
 function updateDatabase($db,$id_recipe,$change){
   
-  $ambildata = $db->prepare("select * from dorayaki where id = ?");
+  $ambildata = $db->prepare("select * from dorayaki where id_recipe = ?");
   $ambildata->bindParam(1, $id_recipe);
   $datavarian = $ambildata->execute();
   while($row = $datavarian->fetchArray(SQLITE3_ASSOC)) {
     $namavarian = $row["nama"];
     $harga = $row["harga"] * $change;
     $data = $row["stok"];
+    $id = $row["id"];
   }
 
-  $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok + ? WHERE id = ?");
+  $queryUpdateData = $db->prepare("UPDATE dorayaki SET stok = stok + ? WHERE id_recipe = ?");
   $queryUpdateRiwayat = $db->prepare("INSERT INTO riwayat(id_varian, varian, username, perubahan) VALUES(?, ?, ?, ?)");
 
   $queryUpdateData->bindParam(1,$change);
   $queryUpdateData->bindParam(2,$id_recipe);
 
-  $queryUpdateRiwayat->bindParam(1, $id_recipe);
+  $queryUpdateRiwayat->bindParam(1, $id);
   $queryUpdateRiwayat->bindParam(2, $namavarian);
   $uname = "System";
   $queryUpdateRiwayat->bindParam(3, $uname);

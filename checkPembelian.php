@@ -82,7 +82,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
             $ip_server = $_SERVER['REMOTE_ADDR'];
             $ip_port = $_SERVER['SERVER_PORT'];
             $ip_data = $ip_server.':'.$ip_port;
-            $params = array('arg0' => $ip_data, 'arg1' => 'http://localhost:8080/webservice/apelmanggakucing', 'arg2'=>$id, 'arg3'=>$jumlah);
+
+            $ambildata = $db->prepare("select * from dorayaki where id = ?");
+            $ambildata->bindParam(1, $id_recipe);
+            $datavarian = $ambildata->execute();
+            while($row = $datavarian->fetchArray(SQLITE3_ASSOC)) {
+              $id_recipe = $row["id_recipe"];
+            }
+
+            $params = array('arg0' => $ip_data, 'arg1' => 'http://localhost:8080/webservice/apelmanggakucing', 'arg2'=>$id_recipe, 'arg3'=>$jumlah);
             $response = $soapclient->addRequest($params);
             foreach ($response as $value){
               $newdata = $value;
