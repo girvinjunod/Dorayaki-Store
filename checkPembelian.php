@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
             $ip_data = $ip_server.':'.$ip_port;
 
             $ambildata = $db->prepare("select * from dorayaki where id = ?");
-            $ambildata->bindParam(1, $id_recipe);
+            $ambildata->bindParam(1, $id);
             $datavarian = $ambildata->execute();
             while($row = $datavarian->fetchArray(SQLITE3_ASSOC)) {
               $id_recipe = $row["id_recipe"];
