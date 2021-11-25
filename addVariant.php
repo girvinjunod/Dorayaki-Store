@@ -38,6 +38,10 @@ else{
         header('Location: '. "index.php");
     }
   }
+
+  $soapclient = new SoapClient('http://localhost:8080/webservice/apelmanggakucing/?wsdl');
+  $response = $soapclient->getAllRecipe();  
+
 }
 ?>
 <html lang="en">
@@ -96,6 +100,17 @@ include "component/header.php";
             <input type="number" name="stock" id="stock" min="0"
             placeholder="Initial Stock" onblur="valStock(this.value)"> 
             <label for="stock" class="stock-err hide label">Please fill the stock field.</label>
+
+            <select name="recipe" id="recipe">
+                <?php
+                    foreach ($response as $value) {
+                        foreach ($value as $val) {
+                            $someObject = json_decode($val);       
+                            echo '<option value=' . $someObject->id_recipe . '>' . $someObject->recipe_name . '</option>';
+                        }
+                    }
+                ?>
+            </select>
 
             <input type="file" id="img" name="img" accept="image/*" onblur="valImg(this.value);" class="file">
             <div class="file-btn">
