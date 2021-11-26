@@ -2,13 +2,14 @@
 $name = $_POST["nama"];
 $desc = $_POST["deskripsi"];
 $price = $_POST["harga"];
-$stock = $_POST["stock"];
 $recipe = $_POST["recipe"];
-if ($name and $desc and $price and $stock and $recipe){
+
+$stock = 0;
+if ($name and $desc and $price and $recipe){
     $valName = false;
     $valDesc = false;
     $valPrice = false;
-    $valStock = false;
+    $valStock = true;
     $valRecipe = false;
 
     if ($name != ""){
@@ -23,14 +24,12 @@ if ($name and $desc and $price and $stock and $recipe){
         $valPrice = true;
     }
 
-    if ($stock != "" and $stock >= 0){
-        $valStock = true;
-    }
     if ($recipe != ""){
         $valRecipe = true;
     }
 
     if ($valName and $valPrice and $valDesc and $valStock){
+        // echo "masuk db" . "<br>";
         $db = new SQLite3('db/doraemon.db');
 
         if(!$db) {
