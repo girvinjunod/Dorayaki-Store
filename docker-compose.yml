@@ -3,4 +3,4 @@ services:
   web:
     build: .
     ports:
-      - 4000:80
+      - 4040:80

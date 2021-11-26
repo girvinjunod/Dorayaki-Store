@@ -38,6 +38,10 @@ else{
         header('Location: '. "index.php");
     }
   }
+
+  $soapclient = new SoapClient('http://localhost:8080/webservice/apelmanggakucing/?wsdl');
+  $response = $soapclient->getAllRecipe();  
+
 }
 ?>
 <html lang="en">
@@ -82,7 +86,19 @@ include "component/header.php";
 <div class="form-register">
         <h2>Add Variant</h2>
         <form action="submitAddVariant.php" method="POST" class="form" onsubmit="return valSubmit();" enctype="multipart/form-data">
-            <input type="text" name="nama" id="nama"
+        <label for="recipe" class="recipe-text">Choose Dorayaki Recipe</label>
+        <select name="recipe" id="recipe">
+                <?php
+                    foreach ($response as $value) {
+                        foreach ($value as $val) {
+                            $someObject = json_decode($val);       
+                            echo '<option class="recipe-opt" value=' . $someObject->id_recipe . '>' . $someObject->recipe_name . '</option>';
+                        }
+                    }
+                ?>
+        </select>    
+        
+        <input type="text" name="nama" id="nama"
             placeholder="Variant Name" onblur="valName(this.value);">
             <label for="nama" class="name-err hide label">Please fill the name field.</label>
 
@@ -93,9 +109,6 @@ include "component/header.php";
             placeholder="Variant Price" onblur="valPrice(this.value);">
             <label for="harga" class="price-err hide label">Please fill the price field.</label>
             
-            <input type="number" name="stock" id="stock" min="0"
-            placeholder="Initial Stock" onblur="valStock(this.value)"> 
-            <label for="stock" class="stock-err hide label">Please fill the stock field.</label>
 
             <input type="file" id="img" name="img" accept="image/*" onblur="valImg(this.value);" class="file">
             <div class="file-btn">
@@ -132,11 +145,10 @@ include "component/header.php";
         var name = document.getElementsByName("nama")[0].value;
         var desc = document.getElementsByName("deskripsi")[0].value;
         var price = document.getElementsByName("harga")[0].value;
-        var stock = document.getElementsByName("stock")[0].value;
         var img = document.getElementsByName("img")[0].value;
 
         console.log(name == "");
-        if (name == "" || desc == "" || price == "" || stock == "" || img == "" || price < 0 || stock < 0){
+        if (name == "" || desc == "" || price == "" || img == "" || price < 0 || stock < 0){
             event.preventDefault();
             var submitErr = document.querySelector("#submit-err");
             submitErr.classList.remove("hide");
@@ -176,19 +188,6 @@ include "component/header.php";
         console.log("Masuk");
         console.log(typeof price);
         if (price.length == 0 || price < 0){
-            msg.classList.remove("hide");
-            console.log("muncul");
-        } else{
-            msg.classList.add("hide");
-            console.log("sembunyi");
-        }
-    }
-
-
-    function valStock(stock){
-        var msg = document.querySelector(".stock-err");
-        console.log("Masuk");
-        if (stock.length == 0 || stock < 0){
             msg.classList.remove("hide");
             console.log("muncul");
         } else{
