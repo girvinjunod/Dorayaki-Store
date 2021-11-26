@@ -125,10 +125,6 @@ include "component/header.php";
               }      
             ?>
             <form action="submitEditDorayaki.php" method="POST" class="form" enctype="multipart/form-data">
-            <input type="text" name="nama" id="nama"
-            placeholder="Variant Name"  value="<?php echo $nama ?>">
-            <label for="nama" class="name-err hide label">Please fill the name field.</label>
-
             <textarea name="deskripsi" id="deskripsi"  placeholder="Description"><?php echo $deskripsi ?></textarea>
             <label for="deskripsi" class="desc-err hide label">Please fill the description field.</label>
             
@@ -170,13 +166,13 @@ include "component/header.php";
     }
 
     function valSubmit(){
-        var name = document.getElementsByName("nama")[0].value;
+        // var name = document.getElementsByName("nama")[0].value;
         var desc = document.getElementsByName("deskripsi")[0].value;
         var price = document.getElementsByName("harga")[0].value;
         // var stock = document.getElementsByName("stock")[0].value;
         // var img = document.getElementsByName("img")[0].value;
 
-        if (name == "" || desc == "" || price == "" || price < 0){
+        if (desc == "" || price == "" || price < 0){
             event.preventDefault();
             var submitErr = document.querySelector("#submit-err");
             submitErr.classList.remove("hide");
@@ -185,18 +181,6 @@ include "component/header.php";
         }
     }
 
-    function valName(name){
-        var msg = document.querySelector(".name-err");
-        console.log("Masuk");
-        if (name.length == 0){
-            msg.classList.remove("hide");
-            console.log("muncul");
-        } else{
-            msg.classList.add("hide");
-            console.log("sembunyi");
-            
-        }
-    }
 
     function valDesc(desc){
         var msg = document.querySelector(".desc-err");

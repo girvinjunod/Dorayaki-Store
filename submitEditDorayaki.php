@@ -1,7 +1,7 @@
 <?php
   if (isset($_POST)){
     $db = new SQLite3('db/doraemon.db');
-    $nama = $_POST['nama'];
+    // $nama = $_POST['nama'];
     $id = $_POST['id'];
     $deskripsi = $_POST['deskripsi'];
     $harga = $_POST['harga'];
@@ -15,20 +15,18 @@
       $imageFileType = strtolower(pathinfo($_FILES["img"]["name"],PATHINFO_EXTENSION));
       $target_file .= $imageFileType;
       move_uploaded_file($_FILES["img"]["tmp_name"], $target_file);
-      $queryEditDorayaki = $db->prepare("UPDATE dorayaki SET nama = ?, harga = ?, deskripsi = ?, gambar=? WHERE id=?");
-      $queryEditDorayaki->bindParam(1, $nama);
-      $queryEditDorayaki->bindParam(2, $harga);
-      $queryEditDorayaki->bindParam(3, $deskripsi);
-      $queryEditDorayaki->bindParam(4, $target_file);
-      $queryEditDorayaki->bindParam(5, $id);
+      $queryEditDorayaki = $db->prepare("UPDATE dorayaki SET harga = ?, deskripsi = ?, gambar=? WHERE id=?");
+      $queryEditDorayaki->bindParam(1, $harga);
+      $queryEditDorayaki->bindParam(2, $deskripsi);
+      $queryEditDorayaki->bindParam(3, $target_file);
+      $queryEditDorayaki->bindParam(4, $id);
       $hasilEditDorayaki = $queryEditDorayaki->execute();
     }
     else{
-      $queryEditDorayaki = $db->prepare("UPDATE dorayaki SET nama = ?, harga = ?, deskripsi = ? WHERE id=?");
-      $queryEditDorayaki->bindParam(1, $nama);
-      $queryEditDorayaki->bindParam(2, $harga);
-      $queryEditDorayaki->bindParam(3, $deskripsi);
-      $queryEditDorayaki->bindParam(4, $id);
+      $queryEditDorayaki = $db->prepare("UPDATE dorayaki SET harga = ?, deskripsi = ? WHERE id=?");
+      $queryEditDorayaki->bindParam(1, $harga);
+      $queryEditDorayaki->bindParam(2, $deskripsi);
+      $queryEditDorayaki->bindParam(3, $id);
       $hasilEditDorayaki = $queryEditDorayaki->execute();
     }
     if($hasilEditDorayaki){
