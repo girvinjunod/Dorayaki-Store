@@ -39,6 +39,13 @@ else{
     }
   }
 
+  $getAllDorayakiName = $db->prepare('SELECT nama from dorayaki');
+  $allDorayakiName = $getAllDorayakiName->execute();
+  $arrName = array();
+    while ($cek = $allDorayakiName->fetchArray(SQLITE3_ASSOC)){ 
+        array_push($arrName, $cek['nama']);
+    }
+
   $soapclient = new SoapClient('http://localhost:8080/webservice/apelmanggakucing/?wsdl');
   $response = $soapclient->getAllRecipe();  
 
@@ -87,20 +94,20 @@ include "component/header.php";
         <h2>Add Variant</h2>
         <form action="submitAddVariant.php" method="POST" class="form" onsubmit="return valSubmit();" enctype="multipart/form-data">
         <label for="recipe" class="recipe-text">Choose Dorayaki Recipe</label>
-        <select name="recipe" id="recipe">
+        <select name="recipe" id="recipe" required>
                 <?php
                     foreach ($response as $value) {
                         foreach ($value as $val) {
-                            $someObject = json_decode($val);       
-                            echo '<option class="recipe-opt" value=' . $someObject->id_recipe . '>' . $someObject->recipe_name . '</option>';
+                            $someObject = json_decode($val);
+                            if (!in_array($someObject->recipe_name,  $arrName)){
+                                echo '<option class="recipe-opt" value=' . $someObject->id_recipe . '>' . $someObject->recipe_name . '</option>';
+                            }     
                         }
                     }
                 ?>
         </select>    
         
-        <input type="text" name="nama" id="nama"
-            placeholder="Variant Name" onblur="valName(this.value);">
-            <label for="nama" class="name-err hide label">Please fill the name field.</label>
+        <input type="hidden" name="nama" id="nama" value="">
 
             <textarea name="deskripsi" id="deskripsi" onblur="valDesc(this.value);" placeholder="Description"></textarea>
             <label for="deskripsi" class="desc-err hide label">Please fill the description field.</label>
@@ -120,7 +127,9 @@ include "component/header.php";
             <label for="img" class="img-err hide">Please input an image for the variant.</label>
             
             <p id="submit-err" class="hide">Please fill all the required fields properly before registering.</p>
-                
+            
+            <p id="no-recipe" class="hide">No recipe left.</p>
+
             <button class="add-button">Add</button>
         </form>
     </div>
@@ -128,6 +137,12 @@ include "component/header.php";
 </div>
 
 <script>
+    let cekRecipe = document.getElementsByName("recipe")[0];
+    if (cekRecipe.value==""){
+        console.log("no recipe left")
+        var norecipe = document.querySelector("#no-recipe");
+        norecipe.classList.remove("hide");
+    }
 
     function getFileName(){
         var p = document.getElementById("file-name");
@@ -142,31 +157,19 @@ include "component/header.php";
     }
 
     function valSubmit(){
-        var name = document.getElementsByName("nama")[0].value;
+        var name = document.getElementsByName("nama")[0];
+        var recipe = document.getElementsByName("recipe")[0];
+        name.value = recipe.options[recipe.selectedIndex].text;
         var desc = document.getElementsByName("deskripsi")[0].value;
         var price = document.getElementsByName("harga")[0].value;
         var img = document.getElementsByName("img")[0].value;
 
-        console.log(name == "");
-        if (name == "" || desc == "" || price == "" || img == "" || price < 0 || stock < 0){
+        if (name == "" || desc == "" || price == "" || img == "" || price < 0 || stock < 0 || recipe.value==""){
             event.preventDefault();
             var submitErr = document.querySelector("#submit-err");
             submitErr.classList.remove("hide");
         } else{
             return true;
-        }
-    }
-
-    function valName(name){
-        var msg = document.querySelector(".name-err");
-        console.log("Masuk");
-        if (name.length == 0){
-            msg.classList.remove("hide");
-            console.log("muncul");
-        } else{
-            msg.classList.add("hide");
-            console.log("sembunyi");
-            
         }
     }
 
