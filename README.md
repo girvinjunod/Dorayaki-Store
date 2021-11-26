@@ -44,10 +44,9 @@ Aplikasi Web Dorayaki Apel Mangga Kucing merupakan suatu aplikasi web untuk pemb
 2. Buka melalui web browser di localhost:4000
 
 # Perbaharuan Aplikasi
-1. Perubahan skema basis data dengan menambah id resep ke tabel dorayaki
-2. Perubahan edit stok oleh admin menjadi membuat request penambahan stok ke pabrik melaui web service.
-3. Update stok berdasarkan status request menggunakan cronjob dan web service
-
+1. Perubahan edit stok oleh admin menjadi membuat request penambahan stok ke pabrik melaui web service.
+2. Update stok berdasarkan status request menggunakan cronjob dan web service
+3. Perubahan dorayaki menjadi berbasis resep yang ada dari pabrik
 
 # Screenshot Tampilan Aplikasi
 
